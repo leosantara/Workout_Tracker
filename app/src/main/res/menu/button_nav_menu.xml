@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+
+        android:icon="@drawable/app_home"
+        android:id="@+id/btnHome"
+        android:title="Home" />
+    <item
+
+        android:icon="@drawable/app_bubble_chat"
+        android:id="@+id/btnPesan"
+        android:title="Pesan" />
+    <item
+
+        android:icon="@drawable/app_more"
+        android:id="@+id/btnLainnya"
+        android:title="Lainnya" />
+</menu>

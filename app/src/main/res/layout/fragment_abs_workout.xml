@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragmentAbsWorkout"
+    tools:context=".fragmentAbsWorkout">
+
+    <LinearLayout
+        android:id="@+id/linearLayouttt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="815dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="150dp"
+                    android:layout_height="65dp"
+                    android:layout_marginLeft="-30dp"
+                    android:layout_weight="0"
+                    android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="Kembali"
+                    android:src="@drawable/app_back_arrow" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"
+
+                    android:layout_marginLeft="-20dp"
+                    android:text="ABS Workout"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnJumpingJacks"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:backgroundTint="#00000000"
+                    android:layout_gravity="center"
+                    android:contentDescription="Jumping Jacks"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini1" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Jumping Jacks"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnAbdominalCrunches"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:backgroundTint="#00000000"
+                    android:layout_gravity="center"
+                    android:contentDescription="Abdominal Crunches"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini2" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Abdominal Crunches"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnRussianTwist"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:backgroundTint="#00000000"
+                    android:layout_gravity="center"
+                    android:contentDescription="Russian Twist"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini3" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Russian Twist"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnMountainClimber"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:backgroundTint="#00000000"
+                    android:layout_gravity="center"
+                    android:contentDescription="Mountain Climber"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini4" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Mountain Climber"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnLegRaises"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:backgroundTint="#00000000"
+                    android:layout_gravity="center"
+                    android:contentDescription="Leg Raises"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini5" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Leg Raises"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnPlank"
+                    android:layout_width="110dp"
+                    android:layout_height="76dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#00000000"
+                    android:contentDescription="Plank"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_absworkout_mini6" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="Plank"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="200dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="-150dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#294199"
+            android:text="Start"
+
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/BarBottom"
+            tools:layout_editor_absoluteX="106dp"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BarBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/button_nav_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

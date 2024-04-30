@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_login">
+
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="com.progandro.workout.fragment_login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragment_login_to_fragment_register"
+            app:destination="@id/fragment_register" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_register"
+        android:name="com.progandro.workout.fragment_register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_fragment_register_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.progandro.workout.fragmentHome"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentAbsWorkout2"
+            app:destination="@id/fragmentAbsWorkout2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAbsWorkout2"
+        android:name="com.progandro.workout.fragmentAbsWorkout"
+        android:label="fragment_abs_workout"
+        tools:layout="@layout/fragment_abs_workout" >
+        <action
+            android:id="@+id/action_fragmentAbsWorkout2_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_fragmentAbsWorkout2_to_fragmentStartAbsWorkout"
+            app:destination="@id/fragmentStartAbsWorkout" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentStartAbsWorkout"
+        android:name="com.progandro.workout.fragmentStartAbsWorkout"
+        android:label="fragment_start_abs_workout"
+        tools:layout="@layout/fragment_start_abs_workout" >
+        <action
+            android:id="@+id/action_fragmentStartAbsWorkout_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_fragmentStartAbsWorkout_to_fragmentAbsWorkout2"
+            app:destination="@id/fragmentAbsWorkout2" />
+    </fragment>
+</navigation>

@@ -1,0 +1,29 @@
+  {
+  "project_info": {
+    "project_number": "694541639427",
+    "project_id": "workouttracker-68a5e",
+    "storage_bucket": "workouttracker-68a5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694541639427:android:bc99b7c7b2cff5acb45336",
+        "android_client_info": {
+          "package_name": "com.progandro.workout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqVEsh2PTFbujymBYVlhX9ZM1ckvN1GVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
