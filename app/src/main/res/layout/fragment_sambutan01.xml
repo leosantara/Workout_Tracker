@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentSambutan01">
+    tools:context="id.ac.ukdw.workout_tracker.fragmentSambutan01">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

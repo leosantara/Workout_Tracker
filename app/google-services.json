@@ -1,4 +1,4 @@
-  {
+{
   "project_info": {
     "project_number": "694541639427",
     "project_id": "workouttracker-68a5e",
@@ -9,7 +9,26 @@
       "client_info": {
         "mobilesdk_app_id": "1:694541639427:android:bc99b7c7b2cff5acb45336",
         "android_client_info": {
-          "package_name": "com.progandro.workout"
+          "package_name": "id.ac.ukdw.workout_tracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqVEsh2PTFbujymBYVlhX9ZM1ckvN1GVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694541639427:android:5f6773f4668a4864b45336",
+        "android_client_info": {
+          "package_name": "id.ac.ukdw.workout_tracker"
         }
       },
       "oauth_client": [],

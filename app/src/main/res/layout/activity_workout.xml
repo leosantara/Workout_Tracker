@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:navGraph = "@navigation/nav_graph"
     android:id="@+id/workout_activity1"
-    tools:context=".WorkoutActivity">
+    tools:context="id.ac.ukdw.workout_tracker.WorkoutActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragmentAbsWorkout"
-    tools:context=".fragmentAbsWorkout">
+    tools:context="id.ac.ukdw.workout_tracker.fragmentAbsWorkout">
 
     <LinearLayout
         android:id="@+id/linearLayouttt"

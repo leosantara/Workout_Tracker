@@ -13,16 +13,16 @@
         android:theme="@style/Theme.Workout"
         tools:targetApi="31">
         <activity
-            android:name=".WorkoutActivity"
+            android:name="id.ac.ukdw.workout_tracker.WorkoutActivity"
             android:exported="false" />
         <activity
-            android:name=".MakananActivity"
+            android:name="id.ac.ukdw.workout_tracker.MakananActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="id.ac.ukdw.workout_tracker.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="id.ac.ukdw.workout_tracker.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

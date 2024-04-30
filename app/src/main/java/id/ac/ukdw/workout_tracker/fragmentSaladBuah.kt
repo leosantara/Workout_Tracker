@@ -1,4 +1,4 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,37 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.progandro.workout.databinding.FragmentHomeBinding
-import com.progandro.workout.databinding.FragmentResepMakananBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.FragmentSaladBuahBinding
 
-class fragmentHome : Fragment() {
-    private var _binding : FragmentHomeBinding? = null
+class fragmentSaladBuah : Fragment() {
+
+    private var _binding : FragmentSaladBuahBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentSaladBuahBinding.inflate(inflater, container, false)
 
-        binding.btnResepMakanan.setOnClickListener {
-            Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
-            Intent(requireContext(), MakananActivity::class.java).also {
-                startActivity(it)
-            }
+        binding.btnBack.setOnClickListener{
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.makanan_activity, fragmentResepMakanan()).commit()
         }
 
-        binding.btnABSWorkout.setOnClickListener {
-            Intent(getContext(), WorkoutActivity::class.java).also {
-                it.putExtra("fragmentType", "FragmentA")
-                startActivity(it)
-            }
-
-        }
-
-            binding.BarBottom.setOnItemSelectedListener { menuItem ->
+        binding.BarBottom.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.btnHome -> {
+                    Intent(getContext(), MainActivity::class.java).also {
+                        startActivity(it)
+                    }
                     Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -55,11 +48,6 @@ class fragmentHome : Fragment() {
             }
         }
 
-
         return binding.root
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

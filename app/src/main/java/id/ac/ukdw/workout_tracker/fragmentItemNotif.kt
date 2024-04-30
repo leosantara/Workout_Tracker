@@ -1,10 +1,11 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import id.ac.ukdw.workout_tracker.R
 
 class fragmentItemNotif : Fragment() {
 

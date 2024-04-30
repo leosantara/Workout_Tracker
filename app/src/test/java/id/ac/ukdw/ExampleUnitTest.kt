@@ -1,4 +1,4 @@
-package com.progandro.workout
+package id.ac.ukdw
 
 import org.junit.Test
 

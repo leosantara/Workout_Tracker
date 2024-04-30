@@ -1,4 +1,4 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import android.os.Bundle
 import android.util.Patterns
@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.progandro.workout.databinding.FragmentRegisterBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.FragmentRegisterBinding
 
 
 @Suppress("UNREACHABLE_CODE")

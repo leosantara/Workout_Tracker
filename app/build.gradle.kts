@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.progandro.workout"
+    namespace =  "id.ac.ukdw.workout_tracker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.progandro.workout"
+        applicationId = "id.ac.ukdw.workout_tracker"
         minSdk = 27
         targetSdk = 33
         versionCode = 1

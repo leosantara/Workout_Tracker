@@ -1,11 +1,11 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.google.firebase.auth.FirebaseAuth
-import com.progandro.workout.databinding.ActivityLoginBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 

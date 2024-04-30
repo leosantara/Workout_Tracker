@@ -1,13 +1,11 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
-import com.progandro.workout.R
-import android.content.Intent
+import id.ac.ukdw.workout_tracker.R
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.progandro.workout.databinding.ActivityMainBinding
+import id.ac.ukdw.workout_tracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

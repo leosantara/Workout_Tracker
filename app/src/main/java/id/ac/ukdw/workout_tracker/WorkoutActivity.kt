@@ -1,14 +1,10 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.progandro.workout.databinding.ActivityLoginBinding
-import com.progandro.workout.databinding.ActivityWorkoutBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.ActivityWorkoutBinding
 
 class WorkoutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWorkoutBinding

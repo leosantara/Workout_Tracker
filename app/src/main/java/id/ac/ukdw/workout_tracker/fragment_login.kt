@@ -1,4 +1,4 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.google.firebase.auth.FirebaseAuth
-import com.progandro.workout.databinding.FragmentLoginBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.FragmentLoginBinding
 
 
 class fragment_login : Fragment() {

@@ -1,11 +1,11 @@
-package com.progandro.workout
+package id.ac.ukdw.workout_tracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.progandro.workout.databinding.ActivityMainBinding
-import com.progandro.workout.databinding.ActivityMakananBinding
+import id.ac.ukdw.workout_tracker.R
+import id.ac.ukdw.workout_tracker.databinding.ActivityMakananBinding
 
 class MakananActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakananBinding

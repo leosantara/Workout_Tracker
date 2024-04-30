@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.progandro.workout.fragment_login"
+        android:name="id.ac.ukdw.workout_tracker.fragment_login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_register"
-        android:name="com.progandro.workout.fragment_register"
+        android:name="id.ac.ukdw.workout_tracker.fragment_register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentHome"
-        android:name="com.progandro.workout.fragmentHome"
+        android:name="id.ac.ukdw.workout_tracker.fragmentHome"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAbsWorkout2"
-        android:name="com.progandro.workout.fragmentAbsWorkout"
+        android:name="id.ac.ukdw.workout_tracker.fragmentAbsWorkout"
         android:label="fragment_abs_workout"
         tools:layout="@layout/fragment_abs_workout" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentStartAbsWorkout"
-        android:name="com.progandro.workout.fragmentStartAbsWorkout"
+        android:name="id.ac.ukdw.workout_tracker.fragmentStartAbsWorkout"
         android:label="fragment_start_abs_workout"
         tools:layout="@layout/fragment_start_abs_workout" >
         <action
