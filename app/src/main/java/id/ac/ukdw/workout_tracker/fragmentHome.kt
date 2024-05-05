@@ -38,12 +38,12 @@ class fragmentHome : Fragment() {
             binding.BarBottom.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.btnHome -> {
-                    Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
                     true
                 }
                 R.id.btnPesan -> {
                     Toast.makeText(requireContext(), "Pesan", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Chat dipilih
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
                     true
                 }
                 R.id.btnLainnya -> {

@@ -2,6 +2,7 @@ package id.ac.ukdw.workout_tracker
 
 import id.ac.ukdw.workout_tracker.R
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -16,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragmentHome = fragmentHome()
-        val fragmentManager : FragmentManager = supportFragmentManager
-
-        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.main_activity, fragmentHome).commit()
+        val fragmentType = intent.getStringExtra("fragmentType")
+        when (fragmentType) {
+            "FragmentHome" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
+            "FragmentPesan" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
+            else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
+        }
     }
 }

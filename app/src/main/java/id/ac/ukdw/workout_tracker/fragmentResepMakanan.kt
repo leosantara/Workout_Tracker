@@ -30,6 +30,7 @@ class fragmentResepMakanan : Fragment() {
 
         binding.btnBack.setOnClickListener{
             Intent(getContext(), MainActivity::class.java).also {
+                it.putExtra("fragmentType", "FragmentHome")
                 startActivity(it)
             }
         }
@@ -38,12 +39,17 @@ class fragmentResepMakanan : Fragment() {
             when (menuItem.itemId) {
                 R.id.btnHome -> {
                     Intent(getContext(), MainActivity::class.java).also {
+                        it.putExtra("fragmentType", "FragmentHome")
                         startActivity(it)
                     }
                     Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.btnPesan -> {
+                    Intent(getContext(), MainActivity::class.java).also {
+                        it.putExtra("fragmentType", "FragmentPesan")
+                        startActivity(it)
+                    }
                     Toast.makeText(requireContext(), "Pesan", Toast.LENGTH_SHORT).show()
                     // Lakukan sesuatu ketika menu Chat dipilih
                     true

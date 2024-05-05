@@ -81,8 +81,10 @@ class fragment_login : Fragment() {
             .addOnCompleteListener(requireActivity()) {
                 if (it.isSuccessful) {
                     Toast.makeText(requireContext(), "Selamat datang $email", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
+                    Intent(getContext(), MainActivity::class.java).also {
+                        it.putExtra("fragmentType", "FragmentHome")
+                        startActivity(it)
+                    }
                 } else {
                     Toast.makeText(requireContext(), "${it.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
