@@ -78,15 +78,16 @@ class fragment_login : Fragment() {
 
     private fun LoginFirebase(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) {
-                if (it.isSuccessful) {
+            .addOnCompleteListener(requireActivity()) {task ->
+                if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Selamat datang $email", Toast.LENGTH_SHORT).show()
                     Intent(getContext(), MainActivity::class.java).also {
                         it.putExtra("fragmentType", "FragmentHome")
+                        it.putExtra("selectedItemId", R.id.btnHome)
                         startActivity(it)
                     }
                 } else {
-                    Toast.makeText(requireContext(), "${it.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }

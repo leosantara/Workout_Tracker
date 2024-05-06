@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.FragmentListPesanNotifBinding
@@ -28,12 +27,22 @@ class fragmentListPesanNotif : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        notifList.add(NotifClass("Aha", "aha", "ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("biji", "aha","ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("bah", "aha", "ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("wkwkw", "aha", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("Aha", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("biji", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("bah", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("wkwkw","ABS Workout", 1 ,1 ))
         notifAdapter = NotifAdapter(notifList)
         binding.recyclerView.adapter = notifAdapter
+
+        notifAdapter.onItemClick = {
+            val fragment = fragmentDetailNotif()
+            val args = Bundle().apply {
+                putParcelable("notif", it)
+            }
+            fragment.arguments = args
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragment).commit()
+        }
+
 
         return binding.root
     }

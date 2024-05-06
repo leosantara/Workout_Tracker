@@ -11,6 +11,7 @@ import id.ac.ukdw.workout_tracker.databinding.FragmentItemNotifBinding
 class NotifAdapter(private val notifList:ArrayList<NotifClass>)
     : RecyclerView.Adapter<NotifAdapter.NotifViewHolder>(){
 
+    var onItemClick : ((NotifClass) -> Unit)? = null
     class NotifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val NotifItemTitle : TextView = itemView.findViewById(R.id.NotifitemTitle)
     }
@@ -27,5 +28,9 @@ class NotifAdapter(private val notifList:ArrayList<NotifClass>)
     override fun onBindViewHolder(holder: NotifViewHolder, position: Int) {
         val notif = notifList[position]
         holder.NotifItemTitle.text = notif.Judul
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(notif)
+        }
     }
 }

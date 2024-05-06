@@ -31,6 +31,9 @@ class fragmentResepMakanan : Fragment() {
         binding.btnBack.setOnClickListener{
             Intent(getContext(), MainActivity::class.java).also {
                 it.putExtra("fragmentType", "FragmentHome")
+                it.putExtra("selectedItemId", R.id.btnHome)
+                it.putExtra("selectedItemIdd", R.id.btnHome)
+
                 startActivity(it)
             }
         }

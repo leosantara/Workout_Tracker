@@ -17,18 +17,16 @@ class MakananActivity : AppCompatActivity() {
         binding = ActivityMakananBinding.inflate(layoutInflater);
 
         binding.BarBottom.setOnItemSelectedListener { menuItem ->
-            val itemId = menuItem.itemId
-            val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putInt("selectedItemId", itemId)
-            editor.apply()
-            true
+
             when (menuItem.itemId) {
 
                 R.id.btnHome -> {
 
                     Intent(this, MainActivity::class.java).also {
                         it.putExtra("fragmentType", "FragmentHome")
+                        it.putExtra("fragmentType", "FragmentHome")
+                        it.putExtra("selectedItemId", R.id.btnHome)
+                        it.putExtra("selectedItemIdd", R.id.btnHome)
                         startActivity(it)
                     }
                     Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
@@ -38,6 +36,8 @@ class MakananActivity : AppCompatActivity() {
 
                     Intent(this, MainActivity::class.java).also {
                         it.putExtra("fragmentType", "FragmentPesan")
+                        it.putExtra("selectedItemId", R.id.btnPesan)
+                        it.putExtra("selectedItemIdd", R.id.btnPesan)
                         startActivity(it)
                     }
                     Toast.makeText(this, "Pesan", Toast.LENGTH_SHORT).show()

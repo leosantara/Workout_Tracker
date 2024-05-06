@@ -14,16 +14,31 @@ import id.ac.ukdw.workout_tracker.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var selectedButtonIndex = 0
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        fun onBottomBarButtonClicked(index: Int) {
-            selectedButtonIndex = index
-            // Update tampilan bottom bar untuk menandai button yang dipilih
+
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        setContentView(binding.root)
+
+
+        val fragmentType = intent.getStringExtra("fragmentType")
+        when (fragmentType) {
+            "FragmentHome" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit().also {
+                val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnHome)
+                val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
+                    binding.BarBottom.selectedItemId = selectedItemId
+                binding.BarBottom.selectedItemId = R.id.btnHome
+            }
+            "FragmentPesan" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit().also{
+                val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnPesan)
+                val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
+                binding.BarBottom.selectedItemId = selectedItemId
+                binding.BarBottom.selectedItemId = R.id.btnPesan
+            }
+            else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
         }
 
         binding.BarBottom.setOnItemSelectedListener { menuItem ->
@@ -44,23 +59,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
-        }
-
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val selectedItemId = sharedPreferences.getInt("selectedItemId", -1)
-
-
-        if (selectedItemId != -1) {
-            binding.BarBottom.selectedItemId = selectedItemId
-        }
-
-        setContentView(binding.root)
-
-        val fragmentType = intent.getStringExtra("fragmentType")
-        when (fragmentType) {
-            "FragmentHome" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
-            "FragmentPesan" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
-            else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
         }
 
 
