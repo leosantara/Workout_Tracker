@@ -35,27 +35,6 @@ class fragmentHome : Fragment() {
 
         }
 
-            binding.BarBottom.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.btnHome -> {
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
-                    true
-                }
-                R.id.btnPesan -> {
-                    Toast.makeText(requireContext(), "Pesan", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
-                    true
-                }
-                R.id.btnLainnya -> {
-                    Toast.makeText(requireContext(), "Lainnya", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Lainnya dipilih
-                    true
-                }
-                else -> false
-            }
-        }
-
-
         return binding.root
     }
     override fun onDestroyView() {

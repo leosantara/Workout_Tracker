@@ -35,33 +35,7 @@ class fragmentResepMakanan : Fragment() {
             }
         }
 
-        binding.BarBottom.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.btnHome -> {
-                    Intent(getContext(), MainActivity::class.java).also {
-                        it.putExtra("fragmentType", "FragmentHome")
-                        startActivity(it)
-                    }
-                    Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.btnPesan -> {
-                    Intent(getContext(), MainActivity::class.java).also {
-                        it.putExtra("fragmentType", "FragmentPesan")
-                        startActivity(it)
-                    }
-                    Toast.makeText(requireContext(), "Pesan", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Chat dipilih
-                    true
-                }
-                R.id.btnLainnya -> {
-                    Toast.makeText(requireContext(), "Lainnya", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Lainnya dipilih
-                    true
-                }
-                else -> false
-            }
-        }
+
 
         return binding.root
 

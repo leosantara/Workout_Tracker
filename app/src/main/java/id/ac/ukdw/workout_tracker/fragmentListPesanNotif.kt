@@ -28,33 +28,12 @@ class fragmentListPesanNotif : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        notifList.add(NotifClass("Aha", "aha"))
-        notifList.add(NotifClass("biji", "aha"))
-        notifList.add(NotifClass("bah", "aha"))
-        notifList.add(NotifClass("wkwkw", "aha"))
+        notifList.add(NotifClass("Aha", "aha", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("biji", "aha","ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("bah", "aha", "ABS Workout", 1 ,1 ))
+        notifList.add(NotifClass("wkwkw", "aha", "ABS Workout", 1 ,1 ))
         notifAdapter = NotifAdapter(notifList)
         binding.recyclerView.adapter = notifAdapter
-
-        binding.BarBottom.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.btnHome -> {
-                    Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
-                    true
-                }
-                R.id.btnPesan -> {
-                    Toast.makeText(requireContext(), "Pesan", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
-                    true
-                }
-                R.id.btnLainnya -> {
-                    Toast.makeText(requireContext(), "Lainnya", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Lainnya dipilih
-                    true
-                }
-                else -> false
-            }
-        }
 
         return binding.root
     }
