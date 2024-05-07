@@ -37,7 +37,12 @@ class MainActivity : AppCompatActivity() {
                 val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
                 binding.BarBottom.selectedItemId = selectedItemId
                 binding.BarBottom.selectedItemId = R.id.btnPesan
-            }
+            }"FragmentLainnya" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit().also{
+            val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnLainnya)
+            val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
+            binding.BarBottom.selectedItemId = selectedItemId
+            binding.BarBottom.selectedItemId = R.id.btnLainnya
+        }
             else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
         }
 
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.btnLainnya -> {
                     Toast.makeText(this, "Lainnya", Toast.LENGTH_SHORT).show()
-                    // Lakukan sesuatu ketika menu Lainnya dipilih
+                    this.supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit()
                     true
                 }
                 else -> false

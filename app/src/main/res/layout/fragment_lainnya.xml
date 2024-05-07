@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="id.ac.ukdw.workout_tracker.fragmentLainnya">
+
+    <LinearLayout
+        android:id="@+id/linearLayouttt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="815dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtJudul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:text="Lainnya"
+                    android:textSize="20dp" />
+            </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgFotoUser"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:paddingTop="20dp"
+                android:src="@drawable/img_abs_workout"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:text="Nama User"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/txtProgres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="Progress Wokrout"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        tools:ignore="TextSizeCheck" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnSetting"
+                    android:layout_width="63dp"
+                    android:layout_marginLeft="-130dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#00FFFFFF"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Setting"
+                    android:src="@drawable/app_setting"
+                    android:scaleType="fitCenter"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="185dp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/img_progres_abs" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:textAlignment="center"
+                        android:text="ABS Workout" />
+
+                    <TextView
+                        android:id="@+id/txtJumlahABS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textSize="30dp"
+                        android:textAlignment="center"
+                        android:text="1x" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/img_progres_arm" />
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:textAlignment="center"
+                        android:text="ARM Workout" />
+                    <TextView
+                        android:id="@+id/txtJumlahARM"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_marginTop="5dp"
+                        android:textSize="30dp"
+                        android:text="1x" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/img_progres_chest" />
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:textAlignment="center"
+                        android:text="ARM Workout" />
+                    <TextView
+                        android:id="@+id/txtJumlahChest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_marginTop="5dp"
+                        android:textSize="30dp"
+                        android:text="1x" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtKalori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Total memakar hinggal 200 Kalori!!!"
+                android:textAlignment="center"
+                android:textColor="#FF0000"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

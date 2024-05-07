@@ -37,7 +37,9 @@ class fragmentDetailNotif : Fragment() {
                 }
             }
         }
-
+        binding.btnBack.setOnClickListener{
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
+        }
 
         return binding.root
     }

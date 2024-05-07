@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="id.ac.ukdw.workout_tracker.fragmentSetting">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayouttt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="815dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="150dp"
+                    android:layout_height="65dp"
+                    android:layout_marginLeft="-30dp"
+                    android:layout_weight="0"
+                    android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="Kembali"
+                    android:src="@drawable/app_back_arrow" />
+
+                <TextView
+                    android:id="@+id/txtJudul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="-20dp"
+                    android:text="Setting"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Ganti Foto Profil"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgFotoUser"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:paddingTop="20dp"
+                android:src="@drawable/img_abs_workout"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnKamera"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:text="Kamera" />
+
+                <Button
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/btnGaleri"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Galeri" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtNamaBaru"
+                android:layout_width="320dp"
+                android:layout_gravity="center"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Nama User"
+                android:inputType="text"
+                android:minHeight="32dp"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="20sp">
+            </EditText>
+            <EditText
+                android:id="@+id/txtPassLama"
+                android:layout_width="320dp"
+                android:layout_gravity="center"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Password Lama"
+                android:inputType="textPassword"
+                android:minHeight="32dp"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="20sp">
+            </EditText>
+            <EditText
+                android:id="@+id/txtPassBaru"
+                android:layout_width="320dp"
+                android:layout_gravity="center"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="Password Baru"
+                android:inputType="textPassword"
+                android:minHeight="32dp"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="20sp">
+            </EditText>
+            <Button
+                android:id="@+id/btnSimpan"
+                android:layout_marginTop="15dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:text="Simpan" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

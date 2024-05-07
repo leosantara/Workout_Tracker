@@ -42,6 +42,12 @@ class WorkoutActivity : AppCompatActivity() {
                     true
                 }
                 R.id.btnLainnya -> {
+                    Intent(this, MainActivity::class.java).also {
+                        it.putExtra("fragmentType", "FragmentLainnya")
+                        it.putExtra("selectedItemId", R.id.btnLainnya)
+                        it.putExtra("selectedItemIdd", R.id.btnLainnya)
+                        startActivity(it)
+                    }
                     Toast.makeText(this, "Lainnya", Toast.LENGTH_SHORT).show()
                     // Lakukan sesuatu ketika menu Lainnya dipilih
                     true
