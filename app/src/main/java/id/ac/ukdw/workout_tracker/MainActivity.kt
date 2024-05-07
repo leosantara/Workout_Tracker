@@ -29,18 +29,15 @@ class MainActivity : AppCompatActivity() {
             "FragmentHome" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit().also {
                 val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnHome)
                 val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
-                    binding.BarBottom.selectedItemId = selectedItemId
                 binding.BarBottom.selectedItemId = R.id.btnHome
             }
             "FragmentPesan" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit().also{
                 val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnPesan)
                 val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
-                binding.BarBottom.selectedItemId = selectedItemId
                 binding.BarBottom.selectedItemId = R.id.btnPesan
             }"FragmentLainnya" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit().also{
             val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnLainnya)
             val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
-            binding.BarBottom.selectedItemId = selectedItemId
             binding.BarBottom.selectedItemId = R.id.btnLainnya
         }
             else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
