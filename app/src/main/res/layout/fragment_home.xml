@@ -296,7 +296,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Cardio Workout"
+                        android:text="Chest Workout"
                         android:textAlignment="center" />
                 </LinearLayout>
 
