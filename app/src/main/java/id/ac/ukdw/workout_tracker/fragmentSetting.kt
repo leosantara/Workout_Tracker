@@ -79,6 +79,10 @@ class fragmentSetting : Fragment() {
             buttonChangePassowrd()
         }
 
+        binding.btnLogout.setOnClickListener{
+            logoutAccount()
+        }
+
 
         return binding.root
     }
