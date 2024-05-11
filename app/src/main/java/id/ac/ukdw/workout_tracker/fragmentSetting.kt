@@ -12,7 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -73,7 +75,106 @@ class fragmentSetting : Fragment() {
             uploadImage()
         }
 
+        binding.btnGantiPass.setOnClickListener{
+            buttonChangePassowrd()
+        }
+
+
         return binding.root
+    }
+
+    private fun buttonChangePassowrd() {
+        binding.cardVerifyPass.visibility = View.VISIBLE
+        binding.btnCancel.setOnClickListener {
+            binding.cardVerifyPass.visibility = View.GONE
+        }
+
+        binding.btnCekPass.setOnClickListener btncek@{
+            val pass = binding.txtPassNow.text.toString()
+
+            if (pass.isEmpty()){
+                binding.txtPassNow.error = "Password is requered"
+                binding.txtPassNow.requestFocus()
+                return@btncek
+            }
+
+//
+            val user = auth.currentUser
+
+            user.let {
+                val credential = EmailAuthProvider.getCredential(auth.currentUser!!.email!!, pass)
+                user?.reauthenticate(credential)?.addOnCompleteListener { task ->
+                    when{
+                        task.isSuccessful -> {
+                            binding.cardVerifyPass.visibility = View.GONE
+                            binding.cardChangePass.visibility = View.VISIBLE
+                        }
+                        task.exception is FirebaseAuthInvalidCredentialsException -> {
+                            binding.txtPassNow.error = "Invalid Passowrd"
+                            binding.txtPassNow.requestFocus()
+                        }
+                        else ->{
+                            Toast.makeText(context, task.exception?.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+            binding.btnUpdatePass.setOnClickListener {
+                val newPass = binding.txtPassBaru1.text.toString()
+                val confirmPass = binding.txtPassBaru2.text.toString()
+
+                if (newPass.isEmpty()){
+                    binding.txtPassBaru1.error = "Password is required"
+                    binding.txtPassBaru1.requestFocus()
+                    return@setOnClickListener
+                }
+                if (confirmPass.isEmpty()){
+                    binding.txtPassBaru2.error = "Password is required"
+                    binding.txtPassBaru2.requestFocus()
+                    return@setOnClickListener
+                }
+                if (newPass.length < 6){
+                    binding.txtPassBaru1.error = "Password must be at least 6 Characters"
+                    binding.txtPassBaru1.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (confirmPass.length < 6){
+                    binding.txtPassBaru2.error = "Password must be at least 6 Characters"
+                    binding.txtPassBaru2.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (newPass != confirmPass){
+                    binding.txtPassBaru2.error = "Password doesn't match"
+                    binding.txtPassBaru2.requestFocus()
+                    return@setOnClickListener
+                }
+
+                user.let{
+                    it?.updatePassword(newPass)
+                        ?.addOnCompleteListener{
+                            if (it.isSuccessful){
+                                Toast.makeText(context, "Password Update", Toast.LENGTH_SHORT).show()
+                                binding.cardVerifyPass.visibility = View.GONE
+                                binding.cardChangePass.visibility = View.GONE
+                                logoutAccount()
+                            }
+                        }
+                }
+
+            }
+        }
+    }
+
+    private fun logoutAccount() {
+        auth.signOut()
+        Intent(requireContext(), LoginActivity::class.java).also {
+            startActivity(it)
+        }
+        activity?.finish()
+        Toast.makeText(requireActivity(), "Silahkan Login Kembali", Toast.LENGTH_SHORT)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -117,3 +218,14 @@ class fragmentSetting : Fragment() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
