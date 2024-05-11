@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:paddingTop="20dp"
-                android:src="@drawable/img_abs_workout"
+                android:src="@drawable/app_profil"
                 app:civ_border_color="@color/black"
                 app:civ_border_width="1dp" />
 
@@ -92,11 +92,22 @@
                     android:text="Galeri" />
             </LinearLayout>
 
+            <Button
+                android:layout_marginLeft="10dp"
+                android:id="@+id/btnSimpanFoto"
+                android:layout_width="320dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Simpan Foto"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"/>
+
             <EditText
                 android:id="@+id/txtNamaBaru"
                 android:layout_width="320dp"
-                android:layout_gravity="center"
                 android:layout_height="52dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_corner"
                 android:hint="Nama User"
@@ -105,8 +116,8 @@
                 android:paddingLeft="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="20sp">
-            </EditText>
+                android:textSize="20sp"></EditText>
+
             <EditText
                 android:id="@+id/txtPassLama"
                 android:layout_width="320dp"
@@ -138,13 +149,13 @@
                 android:textSize="20sp">
             </EditText>
             <Button
-                android:id="@+id/btnSimpan"
+                android:id="@+id/btnSimpanData"
                 android:layout_marginTop="15dp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:text="Simpan" />
+                android:text="Simpan Data" />
         </LinearLayout>
     </LinearLayout>
 

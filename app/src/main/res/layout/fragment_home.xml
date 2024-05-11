@@ -60,11 +60,11 @@
                     tools:layout_editor_absoluteY="1dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/imgProfil"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="20dp"
-                        android:src="@drawable/img_abs_workout"
+                        android:src="@drawable/app_profil"
                         app:civ_border_color="@color/black"
                         app:civ_border_width="1dp" />
                 </LinearLayout>
