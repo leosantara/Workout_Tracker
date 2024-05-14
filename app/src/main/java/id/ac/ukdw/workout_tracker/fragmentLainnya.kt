@@ -1,6 +1,5 @@
 package id.ac.ukdw.workout_tracker
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
@@ -26,99 +25,52 @@ class fragmentLainnya : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var databaseRef: DatabaseReference
     private val binding get() = _binding!!
-    private lateinit var user : User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (_binding == null) {
-            _binding = FragmentLainnyaBinding.inflate(inflater, container, false)
-            if (_binding != null){
-                auth = FirebaseAuth.getInstance()
-                if (auth != null){
-                    currentUserUid = auth.currentUser?.uid.toString()
-                    if (currentUserUid != null){
-                        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-                        val  localfile = File.createTempFile("profil", "jpg")
-                        if (storageRefe != null && localfile != null){
-                            storageRefe.getFile(localfile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                                if (bitmap != null){
-                                    binding.imgFotoUser.setImageBitmap(bitmap)
-                                }else {
-                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
-                                }
-                            }
-                        }
+        // Inflate the layout for this fragment
+        auth = FirebaseAuth.getInstance()
+        currentUserUid = auth.currentUser?.uid.toString()
+        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
 
-                        databaseRef = FirebaseDatabase.getInstance().getReference("users")
-                        databaseRef.child(currentUserUid).get().addOnSuccessListener {
-                            if (it.exists()){
-                                var nama = it.child("nama").value
-                                var abs = it.child("abs").value
-                                var arm = it.child("arm").value
-                                var chest = it.child("chest").value
+        val  localfile = File.createTempFile("profil", "jpg")
+        storageRefe.getFile(localfile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+            binding.imgFotoUser.setImageBitmap(bitmap)
+        }
 
-                                binding.txtNama.text = nama.toString()
-                                binding.txtJumlahABS.text = abs.toString()
-                                binding.txtJumlahARM.text = arm.toString()
-                                binding.txtJumlahChest.text = chest.toString()
-
-                            }
-                        }
-//                        var userRef = databaseRef.child(currentUserUid)
-//                        if (databaseRef != null && userRef != null){
-//                            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
-//                                    var abs = snapshot.child("abs").getValue(String::class.java)
-//                                    var arm = snapshot.child("arm").getValue(String::class.java)
-//                                    var chest = snapshot.child("chest").getValue(String::class.java)
-//                                    if (namaa != null) {
-//                                        user = User(namaa)
-//                                        if (user.getNama() != null){
-//                                            binding.txtNama.text = user.getNama()
-////                                            binding.txtJumlahABS.text = abs
-////                                            binding.txtJumlahARM.text = arm
-////                                            binding.txtJumlahChest.text = chest
-//                                        }else {
-//                                            binding.txtNama.text = "Nama Pengguna"
-//                                        }
-//                                    } else {
-//                                        binding.txtNama.text = "Nama Pengguna"
-//                                    }
-//                                }
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    // Handle onCancelled event
-//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
-//                        }
-
+        databaseRef = FirebaseDatabase.getInstance().getReference("users")
+        var userRef = databaseRef.child(currentUserUid)
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val namaa = snapshot.child("nama").getValue(String::class.java)
+                binding.txtNama.text = namaa
+                Toast.makeText(requireContext(),namaa.toString(), Toast.LENGTH_SHORT).show()
+                for (userSnapshot in snapshot.children) {
+                    val nama = userSnapshot.child("nama").getValue(String::class.java)
+                    if (nama != null) {
+                        Log.d("Nama Pengguna", nama)
+                        binding.txtNama.text = nama
+                    } else {
+                        Log.e("Error", "Nama null atau kosong")
                     }
                 }
             }
-            // Inflate the layout for this fragment
 
-            binding.btnSetting.setOnClickListener{
-//                Intent(requireContext(), TestActivity::class.java).also {
-//                    startActivity(it)
-//                }
-                removeFragment(requireActivity().supportFragmentManager.findFragmentById(R.id.main_activity)!!)
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentSetting()).commit()
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled event
+                Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
 
+        _binding = FragmentLainnyaBinding.inflate(inflater, container, false)
+
+        binding.btnSetting.setOnClickListener{
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentSetting()).commit()
+        }
         return binding.root
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
-    private fun removeFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction().remove(fragment).commit()
-    }
 }
-

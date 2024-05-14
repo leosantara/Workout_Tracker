@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import id.ac.ukdw.workout_tracker.databinding.ActivityMainBinding
@@ -27,53 +26,36 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentType = intent.getStringExtra("fragmentType")
         when (fragmentType) {
-            "FragmentHome" -> {
-                val fragmentHome = fragmentHome()
-                supportFragmentManager.findFragmentById(R.id.main_activity)
-                    ?.let { removeFragment(it) }
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity, fragmentHome)
-                    .commit()
+            "FragmentHome" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit().also {
+                val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnHome)
+                val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
                 binding.BarBottom.selectedItemId = R.id.btnHome
             }
-            "FragmentPesan" -> {
-                val fragmentPesan = fragmentListPesanNotif()
-                supportFragmentManager.findFragmentById(R.id.main_activity)
-                    ?.let { removeFragment(it) }
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity, fragmentPesan)
-                    .commit()
+            "FragmentPesan" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit().also{
+                val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnPesan)
+                val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
                 binding.BarBottom.selectedItemId = R.id.btnPesan
-            }
-            "FragmentLainnya" -> {
-                val fragmentLainnya = fragmentLainnya()
-                supportFragmentManager.findFragmentById(R.id.main_activity)
-                    ?.let { removeFragment(it) }
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_activity, fragmentLainnya)
-                    .commit()
-                binding.BarBottom.selectedItemId = R.id.btnLainnya
-            }
+            }"FragmentLainnya" ->  supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit().also{
+            val selectedItemIdd = sharedPreferences.getInt("selectedItemId", R.id.btnLainnya)
+            val selectedItemId = sharedPreferences.getInt("selectedItemId", selectedItemIdd)
+            binding.BarBottom.selectedItemId = R.id.btnLainnya
         }
-
-
-
-
+            else -> Toast.makeText(this, "lainnya", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
+        }
 
         binding.BarBottom.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.btnHome -> {
-                    removeFragment(supportFragmentManager.findFragmentById(R.id.main_activity)!!)
                     this.supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentHome()).commit()
                     true
                 }
                 R.id.btnPesan -> {
-                    removeFragment(supportFragmentManager.findFragmentById(R.id.main_activity)!!)
+                    Toast.makeText(this, "Pesan", Toast.LENGTH_SHORT).show()
                     this.supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentListPesanNotif()).commit()
                     true
                 }
                 R.id.btnLainnya -> {
-                    removeFragment(supportFragmentManager.findFragmentById(R.id.main_activity)!!)
+                    Toast.makeText(this, "Lainnya", Toast.LENGTH_SHORT).show()
                     this.supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit()
                     true
                 }
@@ -83,8 +65,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun removeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().remove(fragment).commit()
-    }
+
 
 }

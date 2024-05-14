@@ -33,6 +33,7 @@ class fragmentResepMakanan : Fragment() {
                 it.putExtra("fragmentType", "FragmentHome")
                 it.putExtra("selectedItemId", R.id.btnHome)
                 it.putExtra("selectedItemIdd", R.id.btnHome)
+
                 startActivity(it)
             }
         }

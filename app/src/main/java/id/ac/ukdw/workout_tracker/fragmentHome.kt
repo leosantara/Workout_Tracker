@@ -26,7 +26,7 @@ class fragmentHome : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var databaseRef: DatabaseReference
     private lateinit var currentUserUid: String
-    private lateinit var user : User
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,77 +34,50 @@ class fragmentHome : Fragment() {
         savedInstanceState: Bundle?
 
     ): View? {
-        if (_binding == null) {
-            _binding = FragmentHomeBinding.inflate(inflater, container, false)
-            if (_binding != null){
-                auth = FirebaseAuth.getInstance()
-                if (auth != null){
-                    currentUserUid = auth.currentUser?.uid.toString()
-                    if (currentUserUid != null){
-                        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-                        val  localfile = File.createTempFile("profil", "jpg")
-                        if (storageRefe != null && localfile != null){
-                            storageRefe.getFile(localfile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                                if (bitmap != null){
-                                    binding.imgProfil.setImageBitmap(bitmap)
-                                }else {
-                                    binding.imgProfil.setImageResource(R.drawable.app_profil)
-                                }
-                            }
-                        }
+        // Inflate the layout for this fragment
+        auth = FirebaseAuth.getInstance()
+        currentUserUid = auth.currentUser?.uid.toString()
+        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
 
-                        databaseRef = FirebaseDatabase.getInstance().getReference("users")
-                        var userRef = databaseRef.child(currentUserUid)
-                        databaseRef.child(currentUserUid).get().addOnSuccessListener {
-                            if (it.exists()){
-                                var nama = it.child("nama").value
-                                binding.txtNamaPengguna.text = nama.toString()
-                            }
-                        }
-//                        if (databaseRef != null && userRef != null){
-//                            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
-//                                    if (namaa != null) {
-//                                        user = User(namaa)
-//                                        if (user.getNama() != null){
-//                                            binding.txtNamaPengguna.text = user.getNama()
-//
-//                                        }else {
-//                                            binding.txtNamaPengguna.text = "Nama Pengguna"
-//                                        }
-//                                    } else {
-//                                        binding.txtNamaPengguna.text = "Nama Pengguna"
-//                                    }
-//                                }
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    // Handle onCancelled event
-//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
-//                        }
-
-                    }
-                }
-            }
-            // Inflate the layout for this fragment
-
-
-
-            binding.btnResepMakanan.setOnClickListener {
-                Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
-                Intent(requireContext(), MakananActivity::class.java).also {
-                    startActivity(it)
-                }
+        val  localfile = File.createTempFile("profil", "jpg")
+        storageRefe.getFile(localfile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+            binding.imgProfil.setImageBitmap(bitmap)
+        }
+        databaseRef = FirebaseDatabase.getInstance().getReference("users")
+        var userRef = databaseRef.child(currentUserUid)
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val namaa = snapshot.child("nama").getValue(String::class.java)
+                binding.txtNamaPengguna.text = namaa
+                Toast.makeText(requireContext(),namaa.toString(), Toast.LENGTH_SHORT).show()
             }
 
-            binding.btnABSWorkout.setOnClickListener {
-                Intent(getContext(), WorkoutActivity::class.java).also {
-                    it.putExtra("fragmentType", "FragmentA")
-                    startActivity(it)
-                }
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled event
+                Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
+        })
+
+
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
+        binding.btnResepMakanan.setOnClickListener {
+            Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
+            Intent(requireContext(), MakananActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
+
+
+        binding.btnABSWorkout.setOnClickListener {
+            Intent(getContext(), WorkoutActivity::class.java).also {
+                it.putExtra("fragmentType", "FragmentA")
+                startActivity(it)
+            }
+
         }
 
         return binding.root
@@ -113,5 +86,4 @@ class fragmentHome : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
