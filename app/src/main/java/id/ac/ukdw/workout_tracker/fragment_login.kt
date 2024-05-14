@@ -39,7 +39,6 @@ class fragment_login : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         binding.btnLogin.setOnClickListener{
-            Toast.makeText(requireActivity(), "aha", Toast.LENGTH_SHORT).show()
             val email = binding.txtLoginEmail.text.toString()
             val password = binding.txtLoginPass.text.toString()
 
@@ -63,8 +62,6 @@ class fragment_login : Fragment() {
                 binding.txtLoginPass.requestFocus()
                 return@setOnClickListener
             }
-
-            Toast.makeText(requireActivity(), "aha", Toast.LENGTH_SHORT).show()
             LoginFirebase(email,password)
         }
 
