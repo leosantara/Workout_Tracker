@@ -30,6 +30,7 @@ class fragmentSetting : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var ImageUri : Uri
     private lateinit var currentUserUid: String
+    private lateinit var user : User
     private lateinit var databaseRef: DatabaseReference
     private val binding get() = _binding!!
 
@@ -37,54 +38,111 @@ class fragmentSetting : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        auth = FirebaseAuth.getInstance()
-        currentUserUid = auth.currentUser?.uid.toString()
-        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
+        if (_binding == null) {
+            _binding = FragmentSettingBinding.inflate(inflater, container, false)
+            if (_binding != null){
+                auth = FirebaseAuth.getInstance()
+                if (auth != null){
+                    currentUserUid = auth.currentUser?.uid.toString()
+                    if (currentUserUid != null){
+                        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
+                        val  localfile = File.createTempFile("profil", "jpg")
+                        if (storageRefe != null && localfile != null){
+                            storageRefe.getFile(localfile).addOnSuccessListener {
+                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+                                if (bitmap != null){
+                                    binding.imgFotoUser.setImageBitmap(bitmap)
+                                }else {
+                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
+                                }
+                            }
+                        }
 
-        val  localfile = File.createTempFile("profil", "jpg")
-        storageRefe.getFile(localfile).addOnSuccessListener {
-            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-            binding.imgFotoUser.setImageBitmap(bitmap)
-        }
+                        databaseRef = FirebaseDatabase.getInstance().getReference("users")
+                        databaseRef.child(currentUserUid).get().addOnSuccessListener {
+                            if (it.exists()){
+                                var nama = it.child("nama").value
+                                binding.txtNamaBaru.hint = nama.toString()
+                            }
+                        }
+                        var userRef = databaseRef.child(currentUserUid)
+//                        if (databaseRef != null && userRef != null){
+//                            userRef.addValueEventListener(object : ValueEventListener {
+//                                override fun onDataChange(snapshot: DataSnapshot) {
+//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
+//                                    if (namaa != null) {
+//                                        user = User(namaa)
+//                                        if (user.getNama() != null){
+//                                            binding.txtNamaBaru.hint = user.getNama()
+//
+//                                        }else {
+//                                            binding.txtPassNow.hint = "Nama Pengguna"
+//                                        }
+//                                    } else {
+//                                        binding.txtNamaBaru.hint = "Nama Pengguna"
+//                                    }
+//                                }
+//                                override fun onCancelled(error: DatabaseError) {
+//                                    // Handle onCancelled event
+//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
+//                                }
+//                            })
 
-        databaseRef = FirebaseDatabase.getInstance().getReference("users")
-        var userRef = databaseRef.child(currentUserUid)
-        userRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val namaa = snapshot.child("nama").getValue(String::class.java)
-                binding.txtNamaBaru.hint = namaa
+                            binding.btnSimpanData.setOnClickListener {
+                                var nama = binding.txtNamaBaru.text.toString().trim()
+                                if (nama.isEmpty()) {
+                                    binding.txtNamaBaru.error = "Nama tidak boleh kosong"
+                                    binding.txtNamaBaru.requestFocus()
+                                }else{
+                                    val userData = hashMapOf<String, Any>(
+                                        "nama" to nama
+                                    )
+                                    userRef.updateChildren(userData)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(requireContext(), "Berhasil Mengganti Nama", Toast.LENGTH_SHORT).show()
+                                            binding.txtNamaBaru.text.clear()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(requireContext(), "Gagal Mengganti Nama", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+                            }
+
+
+
+                            binding.btnBack.setOnClickListener {
+                            }
+
+                            binding.btnGaleri.setOnClickListener {
+                                selectImage()
+                            }
+                            binding.btnSimpanFoto.setOnClickListener{
+                                uploadImage()
+                            }
+
+                            binding.btnGantiPass.setOnClickListener{
+                                buttonChangePassowrd()
+                            }
+
+                            binding.btnLogout.setOnClickListener{
+                                logoutAccount()
+                            }
+//                        }
+
+                    }
+                }
             }
-            override fun onCancelled(error: DatabaseError) {
-                // Handle onCancelled event
-                Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        // Inflate the layout for this fragment
-        _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
 
-        binding.btnBack.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentLainnya()).commit()
+            // Inflate the layout for this fragment
+
         }
-
-         binding.btnGaleri.setOnClickListener {
-             selectImage()
-         }
-        binding.btnSimpanFoto.setOnClickListener{
-            uploadImage()
-        }
-
-        binding.btnGantiPass.setOnClickListener{
-            buttonChangePassowrd()
-        }
-
-        binding.btnLogout.setOnClickListener{
-            logoutAccount()
-        }
-
-
         return binding.root
+    }
+
+
+    private fun updateData(nama: String) {
+
     }
 
     private fun buttonChangePassowrd() {
@@ -118,7 +176,7 @@ class fragmentSetting : Fragment() {
                             binding.txtPassNow.requestFocus()
                         }
                         else ->{
-                            Toast.makeText(context, task.exception?.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -160,10 +218,10 @@ class fragmentSetting : Fragment() {
                     it?.updatePassword(newPass)
                         ?.addOnCompleteListener{
                             if (it.isSuccessful){
-                                Toast.makeText(context, "Password Update", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Password Update", Toast.LENGTH_SHORT).show()
                                 binding.cardVerifyPass.visibility = View.GONE
                                 binding.cardChangePass.visibility = View.GONE
-                                logoutAccount()
+
                             }
                         }
                 }
@@ -219,7 +277,10 @@ class fragmentSetting : Fragment() {
     }
 
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
 
