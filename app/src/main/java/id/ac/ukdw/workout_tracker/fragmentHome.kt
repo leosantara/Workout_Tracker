@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.FragmentHomeBinding
 import java.io.File
@@ -42,17 +43,30 @@ class fragmentHome : Fragment() {
                     currentUserUid = auth.currentUser?.uid.toString()
                     if (currentUserUid != null){
                         val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-                        val  localfile = File.createTempFile("profil", "jpg")
-                        if (storageRefe != null && localfile != null){
-                            storageRefe.getFile(localfile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                                if (bitmap != null){
-                                    binding.imgProfil.setImageBitmap(bitmap)
-                                }else {
-                                    binding.imgProfil.setImageResource(R.drawable.app_profil)
-                                }
-                            }
+//                        val  localfile = File.createTempFile("profil", "jpg")
+//                        if (storageRefe != null && localfile != null){
+//                            storageRefe.getFile(localfile).addOnSuccessListener {
+//                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+//                                if (bitmap != null){
+//                                    binding.imgProfil.setImageBitmap(bitmap)
+//                                }else {
+//                                    binding.imgProfil.setImageResource(R.drawable.app_profil)
+//                                }
+//                            }
+//                        }
+                        storageRefe.downloadUrl.addOnSuccessListener { uri ->
+                            // Gunakan Picasso untuk memuat gambar dari URL
+                            Picasso.get()
+                                .load(uri)
+                                .placeholder(R.drawable.app_profil) // Gambar placeholder saat gambar sedang dimuat
+                                .error(R.drawable.app_profil)       // Gambar jika terjadi kesalahan
+                                .into(binding.imgProfil)            // ImageView di mana gambar akan dimuat
+                        }.addOnFailureListener {
+                            // Tangani kesalahan jika tidak dapat mendapatkan URL
+                            binding.imgProfil.setImageResource(R.drawable.app_profil)
                         }
+
+
 
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
                         var userRef = databaseRef.child(currentUserUid)
@@ -102,6 +116,19 @@ class fragmentHome : Fragment() {
             binding.btnABSWorkout.setOnClickListener {
                 Intent(getContext(), WorkoutActivity::class.java).also {
                     it.putExtra("fragmentType", "FragmentA")
+                    startActivity(it)
+                }
+            }
+
+            binding.btnARMWorkout.setOnClickListener{
+                Intent(getContext(), WorkoutActivity::class.java).also {
+                    it.putExtra("fragmentType", "FragmentB")
+                    startActivity(it)
+                }
+            }
+            binding.btnChestWorkout.setOnClickListener {
+                Intent(getContext(), WorkoutActivity::class.java).also {
+                    it.putExtra("fragmentType", "FragmentC")
                     startActivity(it)
                 }
             }

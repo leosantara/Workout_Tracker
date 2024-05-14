@@ -21,16 +21,17 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import id.ac.ukdw.workout_tracker.databinding.FragmentSettingBinding
 import java.io.File
 
 
 class fragmentSetting : Fragment() {
-    private var _binding : FragmentSettingBinding? = null
-    private lateinit var auth : FirebaseAuth
-    private lateinit var ImageUri : Uri
+    private var _binding: FragmentSettingBinding? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var ImageUri: Uri
     private lateinit var currentUserUid: String
-    private lateinit var user : User
+    private lateinit var user: User
     private lateinit var databaseRef: DatabaseReference
     private val binding get() = _binding!!
 
@@ -40,27 +41,39 @@ class fragmentSetting : Fragment() {
     ): View? {
         if (_binding == null) {
             _binding = FragmentSettingBinding.inflate(inflater, container, false)
-            if (_binding != null){
+            if (_binding != null) {
                 auth = FirebaseAuth.getInstance()
-                if (auth != null){
+                if (auth != null) {
                     currentUserUid = auth.currentUser?.uid.toString()
-                    if (currentUserUid != null){
-                        val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-                        val  localfile = File.createTempFile("profil", "jpg")
-                        if (storageRefe != null && localfile != null){
-                            storageRefe.getFile(localfile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                                if (bitmap != null){
-                                    binding.imgFotoUser.setImageBitmap(bitmap)
-                                }else {
-                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
-                                }
-                            }
+                    if (currentUserUid != null) {
+                        val storageRefe =
+                            FirebaseStorage.getInstance().getReference(currentUserUid + "/profil")
+//                        val localfile = File.createTempFile("profil", "jpg")
+//                        if (storageRefe != null && localfile != null) {
+//                            storageRefe.getFile(localfile).addOnSuccessListener {
+//                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+//                                if (bitmap != null) {
+//                                    binding.imgFotoUser.setImageBitmap(bitmap)
+//                                } else {
+//                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
+//                                }
+//                            }
+//                        }
+                        storageRefe.downloadUrl.addOnSuccessListener { uri ->
+                            // Gunakan Picasso untuk memuat gambar dari URL
+                            Picasso.get()
+                                .load(uri)
+                                .placeholder(R.drawable.app_profil) // Gambar placeholder saat gambar sedang dimuat
+                                .error(R.drawable.app_profil)       // Gambar jika terjadi kesalahan
+                                .into(binding.imgFotoUser)            // ImageView di mana gambar akan dimuat
+                        }.addOnFailureListener {
+                            // Tangani kesalahan jika tidak dapat mendapatkan URL
+                            binding.imgFotoUser.setImageResource(R.drawable.app_profil)
                         }
 
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
                         databaseRef.child(currentUserUid).get().addOnSuccessListener {
-                            if (it.exists()){
+                            if (it.exists()) {
                                 var nama = it.child("nama").value
                                 binding.txtNamaBaru.hint = nama.toString()
                             }
@@ -88,45 +101,53 @@ class fragmentSetting : Fragment() {
 //                                }
 //                            })
 
-                            binding.btnSimpanData.setOnClickListener {
-                                var nama = binding.txtNamaBaru.text.toString().trim()
-                                if (nama.isEmpty()) {
-                                    binding.txtNamaBaru.error = "Nama tidak boleh kosong"
-                                    binding.txtNamaBaru.requestFocus()
-                                }else{
-                                    val userData = hashMapOf<String, Any>(
-                                        "nama" to nama
-                                    )
-                                    userRef.updateChildren(userData)
-                                        .addOnSuccessListener {
-                                            Toast.makeText(requireContext(), "Berhasil Mengganti Nama", Toast.LENGTH_SHORT).show()
-                                            binding.txtNamaBaru.text.clear()
-                                        }
-                                        .addOnFailureListener {
-                                            Toast.makeText(requireContext(), "Gagal Mengganti Nama", Toast.LENGTH_SHORT).show()
-                                        }
-                                }
+                        binding.btnSimpanData.setOnClickListener {
+                            var nama = binding.txtNamaBaru.text.toString().trim()
+                            if (nama.isEmpty()) {
+                                binding.txtNamaBaru.error = "Nama tidak boleh kosong"
+                                binding.txtNamaBaru.requestFocus()
+                            } else {
+                                val userData = hashMapOf<String, Any>(
+                                    "nama" to nama
+                                )
+                                userRef.updateChildren(userData)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Berhasil Mengganti Nama",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        binding.txtNamaBaru.text.clear()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Gagal Mengganti Nama",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                             }
+                        }
 
 
 
-                            binding.btnBack.setOnClickListener {
-                            }
+                        binding.btnBack.setOnClickListener {
+                        }
 
-                            binding.btnGaleri.setOnClickListener {
-                                selectImage()
-                            }
-                            binding.btnSimpanFoto.setOnClickListener{
-                                uploadImage()
-                            }
+                        binding.btnGaleri.setOnClickListener {
+                            selectImage()
+                        }
+                        binding.btnSimpanFoto.setOnClickListener {
+                            uploadImage()
+                        }
 
-                            binding.btnGantiPass.setOnClickListener{
-                                buttonChangePassowrd()
-                            }
+                        binding.btnGantiPass.setOnClickListener {
+                            buttonChangePassowrd()
+                        }
 
-                            binding.btnLogout.setOnClickListener{
-                                logoutAccount()
-                            }
+                        binding.btnLogout.setOnClickListener {
+                            logoutAccount()
+                        }
 //                        }
 
                     }
@@ -138,11 +159,6 @@ class fragmentSetting : Fragment() {
 
         }
         return binding.root
-    }
-
-
-    private fun updateData(nama: String) {
-
     }
 
     private fun buttonChangePassowrd() {
@@ -266,9 +282,6 @@ class fragmentSetting : Fragment() {
         }
     }
 
-
-
-
     private fun selectImage() {
         val intent = Intent()
         intent.type = "image/*"
@@ -276,21 +289,8 @@ class fragmentSetting : Fragment() {
         startActivityForResult(intent, 100)
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import id.ac.ukdw.workout_tracker.databinding.FragmentLainnyaBinding
 import id.ac.ukdw.workout_tracker.databinding.FragmentSettingBinding
 import java.io.File
@@ -40,16 +41,28 @@ class fragmentLainnya : Fragment() {
                     currentUserUid = auth.currentUser?.uid.toString()
                     if (currentUserUid != null){
                         val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-                        val  localfile = File.createTempFile("profil", "jpg")
-                        if (storageRefe != null && localfile != null){
-                            storageRefe.getFile(localfile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                                if (bitmap != null){
-                                    binding.imgFotoUser.setImageBitmap(bitmap)
-                                }else {
-                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
-                                }
-                            }
+//                        val  localfile = File.createTempFile("profil", "jpg")
+//                        if (storageRefe != null && localfile != null){
+//                            storageRefe.getFile(localfile).addOnSuccessListener {
+//                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+//                                if (bitmap != null){
+//                                    binding.imgFotoUser.setImageBitmap(bitmap)
+//                                }else {
+//                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
+//                                }
+//                            }
+//                        }
+
+                        storageRefe.downloadUrl.addOnSuccessListener { uri ->
+                            // Gunakan Picasso untuk memuat gambar dari URL
+                            Picasso.get()
+                                .load(uri)
+                                .placeholder(R.drawable.app_profil) // Gambar placeholder saat gambar sedang dimuat
+                                .error(R.drawable.app_profil)       // Gambar jika terjadi kesalahan
+                                .into(binding.imgFotoUser)            // ImageView di mana gambar akan dimuat
+                        }.addOnFailureListener {
+                            // Tangani kesalahan jika tidak dapat mendapatkan URL
+                            binding.imgFotoUser.setImageResource(R.drawable.app_profil)
                         }
 
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")

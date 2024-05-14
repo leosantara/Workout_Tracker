@@ -147,7 +147,7 @@
                         android:paddingLeft="5dp"
                         android:src="@drawable/img_progres_arm" />
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/txtGerakan6"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:textAlignment="center"
@@ -177,7 +177,7 @@
                         android:paddingLeft="5dp"
                         android:src="@drawable/img_progres_chest" />
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/txtGerakan2"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:textAlignment="center"

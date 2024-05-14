@@ -51,7 +51,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

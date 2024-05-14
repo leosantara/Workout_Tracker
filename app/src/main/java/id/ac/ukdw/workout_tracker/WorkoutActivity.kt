@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.ActivityWorkoutBinding
 
 class WorkoutActivity : AppCompatActivity() {
@@ -59,7 +58,9 @@ class WorkoutActivity : AppCompatActivity() {
         setContentView(binding.root)
         val fragmentType = intent.getStringExtra("fragmentType")
         when (fragmentType) {
-            "FragmentA" ->  supportFragmentManager.beginTransaction().replace(R.id.workout_activity, fragmentAbsWorkout()).commit()
+            "FragmentA" -> supportFragmentManager.beginTransaction().replace(R.id.workout_activity, fragmentWorkout.newInstance("A")).commit()
+            "FragmentB" -> supportFragmentManager.beginTransaction().replace(R.id.workout_activity, fragmentWorkout.newInstance("B")).commit()
+            "FragmentC" -> supportFragmentManager.beginTransaction().replace(R.id.workout_activity, fragmentWorkout.newInstance("C")).commit()
             else -> Toast.makeText(this, "Pesan", Toast.LENGTH_SHORT).show() // Handle jika tipe fragment tidak dikenali
         }
     }

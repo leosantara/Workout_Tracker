@@ -34,9 +34,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAbsWorkout2"
-        android:name="id.ac.ukdw.workout_tracker.fragmentAbsWorkout"
+        android:name="id.ac.ukdw.workout_tracker.fragmentWorkout"
         android:label="fragment_abs_workout"
-        tools:layout="@layout/fragment_abs_workout" >
+        tools:layout="@layout/fragment_workout" >
         <action
             android:id="@+id/action_fragmentAbsWorkout2_to_fragmentHome"
             app:destination="@id/fragmentHome" />
@@ -46,9 +46,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentStartAbsWorkout"
-        android:name="id.ac.ukdw.workout_tracker.fragmentStartAbsWorkout"
+        android:name="id.ac.ukdw.workout_tracker.fragmentStartWorkout"
         android:label="fragment_start_abs_workout"
-        tools:layout="@layout/fragment_start_abs_workout" >
+        tools:layout="@layout/fragment_start_workout" >
         <action
             android:id="@+id/action_fragmentStartAbsWorkout_to_fragmentHome"
             app:destination="@id/fragmentHome" />

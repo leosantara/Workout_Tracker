@@ -70,7 +70,7 @@
                     android:src="@drawable/img_salad_buah_sehat" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/txtGerakan1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -97,7 +97,7 @@
                     android:src="@drawable/img_omelet_sayuran" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/txtGerakan2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -124,7 +124,7 @@
                     android:src="@drawable/img_ayam_sayur_panggang" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/txtGerakan3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -151,7 +151,7 @@
                     android:src="@drawable/img_nasi_goreng_sayuran" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/txtGerakan4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -178,7 +178,7 @@
                     android:src="@drawable/img_sandwitch_ayam_sayuran" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/txtGerakan5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -205,7 +205,7 @@
                     android:src="@drawable/img_tumis_sayur_tahu" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txtGerakan6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

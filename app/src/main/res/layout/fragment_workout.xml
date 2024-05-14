@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragmentAbsWorkout"
-    tools:context="id.ac.ukdw.workout_tracker.fragmentAbsWorkout">
+    tools:context="id.ac.ukdw.workout_tracker.fragmentWorkout">
 
     <LinearLayout
         android:id="@+id/linearLayouttt"
@@ -61,7 +61,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnJumpingJacks"
+                    android:id="@+id/btnGerakan1"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:backgroundTint="#00000000"
@@ -71,13 +71,13 @@
                     android:src="@drawable/img_absworkout_mini1" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/txtGerakan1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="Jumping Jacks"
+                    android:text="Gerakan 1"
                     android:textSize="20dp" />
             </LinearLayout>
 
@@ -89,7 +89,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnAbdominalCrunches"
+                    android:id="@+id/btnGerakan2"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:backgroundTint="#00000000"
@@ -99,7 +99,7 @@
                     android:src="@drawable/img_absworkout_mini2" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/txtGerakan2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -117,7 +117,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnRussianTwist"
+                    android:id="@+id/btnGerakan3"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:backgroundTint="#00000000"
@@ -127,7 +127,7 @@
                     android:src="@drawable/img_absworkout_mini3" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/txtGerakan3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -145,7 +145,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnMountainClimber"
+                    android:id="@+id/btnGerakan4"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:backgroundTint="#00000000"
@@ -155,7 +155,7 @@
                     android:src="@drawable/img_absworkout_mini4" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/txtGerakan4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -173,7 +173,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnLegRaises"
+                    android:id="@+id/btnGerakan5"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:backgroundTint="#00000000"
@@ -183,7 +183,7 @@
                     android:src="@drawable/img_absworkout_mini5" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/txtGerakan5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -201,7 +201,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btnPlank"
+                    android:id="@+id/btnGerakan6"
                     android:layout_width="110dp"
                     android:layout_height="76dp"
                     android:layout_gravity="center"
@@ -211,7 +211,7 @@
                     android:src="@drawable/img_absworkout_mini6" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txtGerakan6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

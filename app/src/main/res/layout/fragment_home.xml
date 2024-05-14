@@ -261,7 +261,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/basARMWorkout"
+                        android:id="@+id/btnARMWorkout"
                         android:layout_width="195dp"
                         android:layout_height="135dp"
                         android:layout_marginLeft="5dp"
@@ -284,7 +284,7 @@
                     android:layout_marginRight="20dp">
 
                     <ImageButton
-                        android:id="@+id/basChestWorkout"
+                        android:id="@+id/btnChestWorkout"
                         android:layout_width="195dp"
                         android:layout_height="135dp"
                         android:layout_marginLeft="5dp"
