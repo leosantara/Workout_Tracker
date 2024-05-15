@@ -58,17 +58,41 @@
                 android:src="@drawable/app_logo" />
 
             <TextView
+                android:layout_marginTop="20dp"
                 android:id="@+id/txtDeskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="13dp"
                 android:text="deskripsi"
+                android:layout_marginRight="13dp"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/txtKalori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:text="Kalori"
                 android:textAlignment="center"
                 android:textSize="20dp" />
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtTanggalNotif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-100dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:text="Tanggal"
+            android:textAlignment="viewEnd"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

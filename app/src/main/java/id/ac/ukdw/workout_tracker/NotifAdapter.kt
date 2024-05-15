@@ -7,13 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ukdw.workout_tracker.databinding.ActivityMainBinding
 import id.ac.ukdw.workout_tracker.databinding.FragmentItemNotifBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class NotifAdapter(private val notifList:ArrayList<NotifClass>)
     : RecyclerView.Adapter<NotifAdapter.NotifViewHolder>(){
 
     var onItemClick : ((NotifClass) -> Unit)? = null
+
     class NotifViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val NotifItemTitle : TextView = itemView.findViewById(R.id.NotifitemTitle)
+        val NotifItemTanggal : TextView = itemView.findViewById(R.id.txtTanggal)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotifViewHolder {
@@ -27,10 +31,18 @@ class NotifAdapter(private val notifList:ArrayList<NotifClass>)
 
     override fun onBindViewHolder(holder: NotifViewHolder, position: Int) {
         val notif = notifList[position]
-        holder.NotifItemTitle.text = notif.Judul
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+        val calendar = Calendar.getInstance()
+        holder.NotifItemTitle.text = notif.JenisWorkout
+        holder.NotifItemTanggal.text = millisecondsToDate(notif.Waktu.toString(), dateFormat)
 
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(notif)
         }
+    }
+
+    private fun millisecondsToDate(milliseconds: String, dateFormat: SimpleDateFormat): String{
+        val millis:Long = milliseconds.toLong()
+        return dateFormat.format(millis)
     }
 }

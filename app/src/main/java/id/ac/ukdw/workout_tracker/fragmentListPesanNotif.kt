@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.FragmentListPesanNotifBinding
 import id.ac.ukdw.workout_tracker.databinding.FragmentResepMakananBinding
@@ -14,6 +19,9 @@ class fragmentListPesanNotif : Fragment() {
 
     private var notifList : ArrayList<NotifClass> = arrayListOf()
     private lateinit var notifAdapter : NotifAdapter
+    private lateinit var auth : FirebaseAuth
+    private lateinit var databaseRef: DatabaseReference
+    private lateinit var currentUserUid: String
     private var _binding : FragmentListPesanNotifBinding? = null
     private val binding get() = _binding!!
 
@@ -27,10 +35,11 @@ class fragmentListPesanNotif : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        notifList.add(NotifClass("Aha", "ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("biji", "ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("bah", "ABS Workout", 1 ,1 ))
-        notifList.add(NotifClass("wkwkw","ABS Workout", 1 ,1 ))
+        auth = FirebaseAuth.getInstance()
+        currentUserUid = auth.currentUser?.uid.toString()
+        databaseRef = FirebaseDatabase.getInstance().getReference("users")
+
+        fetchNotifications()
         notifAdapter = NotifAdapter(notifList)
         binding.recyclerView.adapter = notifAdapter
 
@@ -50,5 +59,27 @@ class fragmentListPesanNotif : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun fetchNotifications() {
+        databaseRef.get().addOnSuccessListener { snapshot ->
+            for (userSnapshot in snapshot.children) {
+                val notifSnapshot = userSnapshot.child("notifikasi")
+                if (notifSnapshot.exists()) {
+                    val t = object : GenericTypeIndicator<List<List<Any>>>() {}
+                    val notifications = notifSnapshot.getValue(t)
+                    if (notifications != null) {
+                        for (notification in notifications) {
+                            val workoutType = notification[0] as? String ?: continue
+                            val time = notification[1] as? Long ?: continue
+                            notifList.add(NotifClass(workoutType, time))
+                        }
+                    }
+                }
+            }
+            // Handle notifList (e.g., update UI)
+            notifAdapter.notifyDataSetChanged()
+        }.addOnFailureListener {
+
+        }
     }
 }

@@ -66,8 +66,6 @@ class fragmentHome : Fragment() {
                             binding.imgProfil.setImageResource(R.drawable.app_profil)
                         }
 
-
-
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
                         var userRef = databaseRef.child(currentUserUid)
                         databaseRef.child(currentUserUid).get().addOnSuccessListener {

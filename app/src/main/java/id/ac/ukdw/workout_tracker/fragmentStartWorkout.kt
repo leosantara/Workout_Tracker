@@ -11,7 +11,10 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import id.ac.ukdw.workout_tracker.databinding.FragmentStartWorkoutBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 
@@ -233,9 +236,21 @@ class fragmentStartWorkout : Fragment() {
                             "C" -> "chest"
                             else -> String()
                         }
+                        val dateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+                        val calendar = Calendar.getInstance()
+                        var tanggal = dateFormat.format(calendar.time)
                         auth = FirebaseAuth.getInstance()
                         currentUserUid = auth.currentUser?.uid.toString()
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
+
+                        if (workouto == "abs"){
+                            addNotification("ABS", dateToMilliseconds(tanggal,dateFormat))
+                        }else if (workouto == "arm"){
+                            addNotification("ARM", dateToMilliseconds(tanggal,dateFormat))
+                        }else if (workouto == "chest"){
+                            addNotification("Chest", dateToMilliseconds(tanggal,dateFormat))
+                        }
+
                         var userRef = databaseRef.child(currentUserUid)
                         databaseRef.child(currentUserUid).get().addOnSuccessListener {
                             if (it.exists()){
@@ -317,6 +332,26 @@ class fragmentStartWorkout : Fragment() {
         }.start()
     }
 
+    private fun addNotification(workoutType: String, time: Long) {
+        val notificationRef = databaseRef.child(currentUserUid).child("notifikasi")
+
+        notificationRef.get().addOnSuccessListener { snapshot ->
+            // Menggunakan GenericTypeIndicator untuk menangani list dengan tipe generic
+            val t = object : GenericTypeIndicator<List<List<Any>>>() {}
+            val currentList: MutableList<List<Any>> = snapshot.getValue(t)?.toMutableList() ?: mutableListOf()
+            val newNotification = listOf(workoutType, time)
+
+            currentList.add(newNotification)
+
+            notificationRef.setValue(currentList).addOnSuccessListener {
+                Toast.makeText(context, "Notification added successfully", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                Toast.makeText(context, "Failed to add notification", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(context, "Failed to retrieve current notifications", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
         private const val ARG_LIST_TYPE = "list_type"
@@ -328,5 +363,9 @@ class fragmentStartWorkout : Fragment() {
                     putString(ARG_LIST_TYPE, listType)
                 }
             }
+    }
+    private fun dateToMilliseconds(date: String, dateFormat:SimpleDateFormat): Long {
+        val mDate = dateFormat.parse(date)
+        return mDate.time
     }
 }
