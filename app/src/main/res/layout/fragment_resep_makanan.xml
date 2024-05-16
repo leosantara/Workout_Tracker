@@ -51,169 +51,25 @@
                     android:layout_marginLeft="-20dp"
                     android:text="Resep Makanan"
                     android:textSize="20dp" />
+
             </LinearLayout>
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/btnSaladBuah"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Salad Buah"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_salad_buah_sehat" />
-
-                <TextView
-                    android:id="@+id/txtGerakan1"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Salad Buah Sehat"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                    android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewMakanan"
 
-                <ImageButton
-                    android:id="@+id/btnOmeletSayuran"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Omelet Sayuran"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_omelet_sayuran" />
-
-                <TextView
-                    android:id="@+id/txtGerakan2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Omelet Sayuran"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnAyamSayurPanggang"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Ayam Sayur Panggang"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_ayam_sayur_panggang" />
-
-                <TextView
-                    android:id="@+id/txtGerakan3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Ayam Sayur Panggang"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnNasiGorengSayuran"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Nasi Goreng Sayuran"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_nasi_goreng_sayuran" />
-
-                <TextView
-                    android:id="@+id/txtGerakan4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Nasi Goreng Sayuran"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnSandwitchAYamSayur"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Sandwitch Ayama dan Sayur"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_sandwitch_ayam_sayuran" />
-
-                <TextView
-                    android:id="@+id/txtGerakan5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Sandwitch Ayam Sayur"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnTumisSayurTahu"
-                    android:layout_width="110dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Tumis Sayuran dengan Tahu"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/img_tumis_sayur_tahu" />
-
-                <TextView
-                    android:id="@+id/txtGerakan6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:text="Tumis Sayuran dengan Tahu"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
 

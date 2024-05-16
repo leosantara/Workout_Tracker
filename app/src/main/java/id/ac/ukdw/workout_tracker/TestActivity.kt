@@ -32,13 +32,6 @@
                 when (menuItem.itemId) {
 
                     R.id.btnHome -> {
-                        auth = FirebaseAuth.getInstance()
-                        currentUserUid = auth.currentUser?.uid ?: ""
-                        databaseRef = FirebaseDatabase.getInstance().getReference("users")
-                        val dateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
-                        val calendar = Calendar.getInstance()
-                        var tanggal = dateFormat.format(calendar.time)
-                        addNotification("Chest", tanggal.toLong())
                         true
                     }
                     R.id.btnPesan -> {
@@ -66,26 +59,16 @@
 
             setContentView(binding.root)
 
+            val fragmentResepMakanan = fragmentResepMakanan()
+            val fragmentManager : FragmentManager = supportFragmentManager
+
+            val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
+
+            fragmentTransaction.replace(R.id.activity_login, fragmentResepMakanan).commit()
+
         }
 
-        private fun addNotification(workoutType: String, time: Long) {
-            val notificationRef = databaseRef.child(currentUserUid).child("notifikasi")
 
-            notificationRef.get().addOnSuccessListener { snapshot ->
-                // Menggunakan GenericTypeIndicator untuk menangani list dengan tipe generic
-                val t = object : GenericTypeIndicator<List<List<Any>>>() {}
-                val currentList: MutableList<List<Any>> = snapshot.getValue(t)?.toMutableList() ?: mutableListOf()
-                val newNotification = listOf(workoutType, time)
 
-                currentList.add(newNotification)
-
-                notificationRef.setValue(currentList).addOnSuccessListener {
-                    Toast.makeText(this, "Notification added successfully", Toast.LENGTH_SHORT).show()
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Failed to add notification", Toast.LENGTH_SHORT).show()
-                }
-            }.addOnFailureListener {
-                Toast.makeText(this, "Failed to retrieve current notifications", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
+
