@@ -15,6 +15,7 @@ class MakananActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakananBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         binding = ActivityMakananBinding.inflate(layoutInflater);
 
         binding.BarBottom.setOnItemSelectedListener { menuItem ->

@@ -41,17 +41,6 @@ class fragmentLainnya : Fragment() {
                     currentUserUid = auth.currentUser?.uid.toString()
                     if (currentUserUid != null){
                         val storageRefe = FirebaseStorage.getInstance().getReference(currentUserUid+"/profil")
-//                        val  localfile = File.createTempFile("profil", "jpg")
-//                        if (storageRefe != null && localfile != null){
-//                            storageRefe.getFile(localfile).addOnSuccessListener {
-//                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-//                                if (bitmap != null){
-//                                    binding.imgFotoUser.setImageBitmap(bitmap)
-//                                }else {
-//                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
-//                                }
-//                            }
-//                        }
 
                         storageRefe.downloadUrl.addOnSuccessListener { uri ->
                             // Gunakan Picasso untuk memuat gambar dari URL
@@ -78,46 +67,22 @@ class fragmentLainnya : Fragment() {
                                 binding.txtJumlahARM.text = arm.toString()
                                 binding.txtJumlahChest.text = chest.toString()
 
+                                val absValue = (abs?.toString()?.toIntOrNull() ?: 0)
+                                val armValue = (arm?.toString()?.toIntOrNull() ?: 0)
+                                val chestValue = (chest?.toString()?.toIntOrNull() ?: 0)
+
+                                val total = absValue*80 + armValue*80 + chestValue*100
+                                binding.txtKalori.text = "Total memakar hinggal $total Kalori!!!"
+
                             }
                         }
-//                        var userRef = databaseRef.child(currentUserUid)
-//                        if (databaseRef != null && userRef != null){
-//                            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
-//                                    var abs = snapshot.child("abs").getValue(String::class.java)
-//                                    var arm = snapshot.child("arm").getValue(String::class.java)
-//                                    var chest = snapshot.child("chest").getValue(String::class.java)
-//                                    if (namaa != null) {
-//                                        user = User(namaa)
-//                                        if (user.getNama() != null){
-//                                            binding.txtNama.text = user.getNama()
-////                                            binding.txtJumlahABS.text = abs
-////                                            binding.txtJumlahARM.text = arm
-////                                            binding.txtJumlahChest.text = chest
-//                                        }else {
-//                                            binding.txtNama.text = "Nama Pengguna"
-//                                        }
-//                                    } else {
-//                                        binding.txtNama.text = "Nama Pengguna"
-//                                    }
-//                                }
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    // Handle onCancelled event
-//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
-//                        }
+
 
                     }
                 }
             }
-            // Inflate the layout for this fragment
 
             binding.btnSetting.setOnClickListener{
-//                Intent(requireContext(), TestActivity::class.java).also {
-//                    startActivity(it)
-//                }
                 removeFragment(requireActivity().supportFragmentManager.findFragmentById(R.id.main_activity)!!)
                 requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragmentSetting()).commit()
             }

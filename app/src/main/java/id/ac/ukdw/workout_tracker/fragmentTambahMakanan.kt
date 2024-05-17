@@ -3,8 +3,10 @@ package id.ac.ukdw.workout_tracker
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,18 +14,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
 import id.ac.ukdw.workout_tracker.databinding.FragmentRegisterBinding
 import id.ac.ukdw.workout_tracker.databinding.FragmentTambahMakananBinding
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class fragmentTambahMakanan : Fragment() {
     private lateinit var _binding : FragmentTambahMakananBinding
     private lateinit var makananAdapter: MakananAdapter
     private lateinit var databaseRef: DatabaseReference
     private val binding get() = _binding!!
+    private val REQUEST_IMAGE_CAPTURE = 1
     private var makananList: ArrayList<MakananClass> = arrayListOf()
     private lateinit var ImageUri: Uri
     var namaResep : String = ""
@@ -31,6 +41,9 @@ class fragmentTambahMakanan : Fragment() {
     var Cara : String = ""
 
     override fun onCreateView(
+
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -45,6 +58,30 @@ class fragmentTambahMakanan : Fragment() {
             namaResep = binding.txtJudulMakanan.text.toString()
             Bahan = binding.txtBahanMakanan.text.toString()
             Cara = binding.txtCaraPembuatan.text.toString()
+
+            if (namaResep.isEmpty()){
+                binding.txtJudulMakanan.error = "Nama Resep Harus Diisi"
+                binding.txtJudulMakanan.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (Bahan.isEmpty()){
+                binding.txtBahanMakanan.error = "Bahan-bahan harus Diisi"
+                binding.txtBahanMakanan.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (Cara.isEmpty()){
+                binding.txtCaraPembuatan.error = "Cara Memasak Harus Diisi"
+                binding.txtCaraPembuatan.requestFocus()
+                return@setOnClickListener
+            }
+            if (isImageViewDrawableEqualToResource(binding.imgFotoUser, R.drawable.app_siluet_makanan)) {
+                Toast.makeText(context, "Foto masakan harus di tambahkan", Toast.LENGTH_SHORT).show()
+                binding.imgFotoUser.requestFocus()
+                return@setOnClickListener
+            }
+
             uploadImage()
         }
 
@@ -53,6 +90,10 @@ class fragmentTambahMakanan : Fragment() {
                 it.putExtra("fragmentType", "FragmentHome")
                 startActivity(it)
             }
+        }
+
+        binding.btnKamera.setOnClickListener {
+            dispatchTakePictureIntent()
         }
 
         setupEditTextListeners()
@@ -117,8 +158,10 @@ class fragmentTambahMakanan : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 100 && resultCode == Activity.RESULT_OK){
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             ImageUri = data?.data!!
+            binding.imgFotoUser.setImageURI(ImageUri)
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             binding.imgFotoUser.setImageURI(ImageUri)
         }
     }
@@ -157,6 +200,53 @@ class fragmentTambahMakanan : Fragment() {
     private fun appendTextToTextView(newText: String, textView: TextView) {
         val currentText = textView.text.toString()
         textView.text = "$currentText\n$newText"
+    }
+
+    private fun isImageViewDrawableEqualToResource(imageView: CircleImageView, resourceId: Int): Boolean {
+        val imageViewDrawable = imageView.drawable
+        val resourceDrawable = ResourcesCompat.getDrawable(resources, resourceId, null)
+
+        if (imageViewDrawable == null || resourceDrawable == null) {
+            return false
+        }
+
+        val imageViewBitmap = (imageViewDrawable as BitmapDrawable).bitmap
+        val resourceBitmap = (resourceDrawable as BitmapDrawable).bitmap
+
+        return imageViewBitmap.sameAs(resourceBitmap)
+    }
+
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+            val photoFile: File? = try {
+                createImageFile()
+            } catch (ex: IOException) {
+                null
+            }
+            photoFile?.also {
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "id.ac.ukdw.workout_tracker.fileprovider",
+                    it
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = requireActivity().getExternalFilesDir(null)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            ImageUri = Uri.fromFile(this)
+        }
     }
 
 }

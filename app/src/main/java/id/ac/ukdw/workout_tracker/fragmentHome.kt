@@ -103,7 +103,6 @@ class fragmentHome : Fragment() {
             }
 
             binding.btnTambahMakanan.setOnClickListener{
-                Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
                 Intent(requireContext(), MakananActivity::class.java).also {
                     it.putExtra("fragmentType", "FragmentB")
                     startActivity(it)

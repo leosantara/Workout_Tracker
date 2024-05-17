@@ -184,7 +184,7 @@ class fragmentStartWorkout : Fragment() {
                 "drawable/img_armworkout_big6"
             )
             "C" ->  listOf(
-                "drawable/img_chest_big1",
+                "drawable/img_absworkout_big1",
                 "drawable/img_chest_big2",
                 "drawable/img_chest_big3",
                 "drawable/img_chest_big4",

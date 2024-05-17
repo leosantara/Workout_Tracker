@@ -6,12 +6,14 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -24,6 +26,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import id.ac.ukdw.workout_tracker.databinding.FragmentSettingBinding
 import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 class fragmentSetting : Fragment() {
@@ -33,6 +38,7 @@ class fragmentSetting : Fragment() {
     private lateinit var currentUserUid: String
     private lateinit var user: User
     private lateinit var databaseRef: DatabaseReference
+    private val REQUEST_IMAGE_CAPTURE = 1
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -48,17 +54,7 @@ class fragmentSetting : Fragment() {
                     if (currentUserUid != null) {
                         val storageRefe =
                             FirebaseStorage.getInstance().getReference(currentUserUid + "/profil")
-//                        val localfile = File.createTempFile("profil", "jpg")
-//                        if (storageRefe != null && localfile != null) {
-//                            storageRefe.getFile(localfile).addOnSuccessListener {
-//                                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-//                                if (bitmap != null) {
-//                                    binding.imgFotoUser.setImageBitmap(bitmap)
-//                                } else {
-//                                    binding.imgFotoUser.setImageResource(R.drawable.app_profil)
-//                                }
-//                            }
-//                        }
+
                         storageRefe.downloadUrl.addOnSuccessListener { uri ->
                             // Gunakan Picasso untuk memuat gambar dari URL
                             Picasso.get()
@@ -79,28 +75,6 @@ class fragmentSetting : Fragment() {
                             }
                         }
                         var userRef = databaseRef.child(currentUserUid)
-//                        if (databaseRef != null && userRef != null){
-//                            userRef.addValueEventListener(object : ValueEventListener {
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
-//                                    if (namaa != null) {
-//                                        user = User(namaa)
-//                                        if (user.getNama() != null){
-//                                            binding.txtNamaBaru.hint = user.getNama()
-//
-//                                        }else {
-//                                            binding.txtPassNow.hint = "Nama Pengguna"
-//                                        }
-//                                    } else {
-//                                        binding.txtNamaBaru.hint = "Nama Pengguna"
-//                                    }
-//                                }
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    // Handle onCancelled event
-//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
-
                         binding.btnSimpanData.setOnClickListener {
                             var nama = binding.txtNamaBaru.text.toString().trim()
                             if (nama.isEmpty()) {
@@ -129,9 +103,17 @@ class fragmentSetting : Fragment() {
                             }
                         }
 
-
+                        binding.btnKamera.setOnClickListener {
+                            dispatchTakePictureIntent()
+                        }
 
                         binding.btnBack.setOnClickListener {
+                            Intent(context, MainActivity::class.java).also {
+                                it.putExtra("fragmentType", "FragmentLainnya")
+                                it.putExtra("selectedItemId", R.id.btnLainnya)
+                                it.putExtra("selectedItemIdd", R.id.btnLainnya)
+                                startActivity(it)
+                            }
                         }
 
                         binding.btnGaleri.setOnClickListener {
@@ -153,10 +135,7 @@ class fragmentSetting : Fragment() {
                     }
                 }
             }
-
-
             // Inflate the layout for this fragment
-
         }
         return binding.root
     }
@@ -258,8 +237,10 @@ class fragmentSetting : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 100 && resultCode == RESULT_OK){
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             ImageUri = data?.data!!
+            binding.imgFotoUser.setImageURI(ImageUri)
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             binding.imgFotoUser.setImageURI(ImageUri)
         }
     }
@@ -288,6 +269,39 @@ class fragmentSetting : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, 100)
     }
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
+            val photoFile: File? = try {
+                createImageFile()
+            } catch (ex: IOException) {
+                null
+            }
+            photoFile?.also {
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "id.ac.ukdw.workout_tracker.fileprovider",
+                    it
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = requireActivity().getExternalFilesDir(null)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            ImageUri = Uri.fromFile(this)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
