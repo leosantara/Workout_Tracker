@@ -1,14 +1,10 @@
 package id.ac.ukdw.workout_tracker
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.ActivityMakananBinding
 
 class MakananActivity : AppCompatActivity() {

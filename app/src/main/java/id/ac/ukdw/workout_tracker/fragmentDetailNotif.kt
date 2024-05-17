@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ukdw.workout_tracker.databinding.FragmentDetailNotifBinding
-import id.ac.ukdw.workout_tracker.databinding.FragmentListPesanNotifBinding
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class fragmentDetailNotif : Fragment() {
     private var _binding : FragmentDetailNotifBinding? = null
@@ -24,8 +21,6 @@ class fragmentDetailNotif : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDetailNotifBinding.inflate(inflater, container, false)
         val dateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
-        val calendar = Calendar.getInstance()
-        var tanggal = dateFormat.format(calendar.time)
         arguments?.let { args ->
             // Mengecek apakah data dengan key "notif" ada dalam argument
             if (args.containsKey("notif")) {

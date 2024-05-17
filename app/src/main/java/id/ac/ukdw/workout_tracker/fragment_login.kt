@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.google.firebase.auth.FirebaseAuth
-import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.FragmentLoginBinding
 
 
@@ -32,7 +31,6 @@ class fragment_login : Fragment() {
 
         binding.btnRegister.setOnClickListener{
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.activity_login, fragment_register()).commit()
-//            Navigation.findNavController(binding.root).navigate(R.id.action_fragment_login_to_fragment_register)
         }
 
 

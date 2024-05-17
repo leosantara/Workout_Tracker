@@ -95,19 +95,6 @@ class fragmentWorkout : Fragment() {
         binding.btnStart.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.workout_activity, fragmentStartWorkout.newInstancet(listType!!)).commit()
-
-//            if (listType == "A"){
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.workout_activity, fragmentStartWorkout.newInstance("A")).commit()
-//            } else if (listType == "B"){
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.workout_activity, fragmentStartWorkout.newInstance("B")).commit()
-//            }else if (listType == "C"){
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.workout_activity, fragmentStartWorkout.newInstance("C")).commit()
-//            }
-
-
         }
     }
     private fun getDrawableId(name: String): Int {

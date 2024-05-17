@@ -5,10 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import id.ac.ukdw.workout_tracker.databinding.ActivityMainBinding
-import id.ac.ukdw.workout_tracker.databinding.FragmentItemNotifBinding
 import java.text.SimpleDateFormat
-import java.util.Calendar
+
 
 class NotifAdapter(private val notifList:ArrayList<NotifClass>)
     : RecyclerView.Adapter<NotifAdapter.NotifViewHolder>(){
@@ -32,7 +30,6 @@ class NotifAdapter(private val notifList:ArrayList<NotifClass>)
     override fun onBindViewHolder(holder: NotifViewHolder, position: Int) {
         val notif = notifList[position]
         val dateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
-        val calendar = Calendar.getInstance()
         holder.NotifItemTitle.text = notif.JenisWorkout
         holder.NotifItemTanggal.text = millisecondsToDate(notif.Waktu.toString(), dateFormat)
 

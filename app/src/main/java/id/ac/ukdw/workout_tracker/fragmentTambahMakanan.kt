@@ -16,12 +16,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
-import id.ac.ukdw.workout_tracker.databinding.FragmentRegisterBinding
 import id.ac.ukdw.workout_tracker.databinding.FragmentTambahMakananBinding
 import java.io.File
 import java.io.IOException
@@ -30,7 +28,6 @@ import java.util.Date
 
 class fragmentTambahMakanan : Fragment() {
     private lateinit var _binding : FragmentTambahMakananBinding
-    private lateinit var makananAdapter: MakananAdapter
     private lateinit var databaseRef: DatabaseReference
     private val binding get() = _binding!!
     private val REQUEST_IMAGE_CAPTURE = 1
