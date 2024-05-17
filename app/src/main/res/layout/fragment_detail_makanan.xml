@@ -62,6 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
 
+            android:paddingRight="34dp"
+
             android:layout_marginStart="42dp"
             android:text=" -   2 Mangga, potong dadu \n
 -   2 Semangka, potong dadu \n
@@ -90,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
+            android:paddingRight="5dp"
             android:text="1.  Campur semua buah dalam mangkuk besar. \n2.  Di mangkuk kecil, campur madu dan air perasan \n      jeruk nipis atau lemon. Jika diinginkan tambahkan \n      garam untuk memebrikan sentuhan kontrast atau \n      bubuk kayu manis untuk aroma tambahan. \n3.  Tuangkan ccampuran madu dan air perasan jeruk \n      nipis atau lemon ke dalam buah lalu aduk perlahan \n      hingga merata. \n4.  Hiasi dengan mint segar jika diinginkan"
             android:textSize="14dp"
             tools:ignore="TextSizeCheck" />

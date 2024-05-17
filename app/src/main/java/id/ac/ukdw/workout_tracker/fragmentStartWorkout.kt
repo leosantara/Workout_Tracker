@@ -242,7 +242,6 @@ class fragmentStartWorkout : Fragment() {
                         auth = FirebaseAuth.getInstance()
                         currentUserUid = auth.currentUser?.uid.toString()
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
-
                         if (workouto == "abs"){
                             addNotification("ABS", dateToMilliseconds(tanggal,dateFormat))
                         }else if (workouto == "arm"){
@@ -277,8 +276,6 @@ class fragmentStartWorkout : Fragment() {
 
                             }
                         }
-
-
                     }
                 }
                 if (tipeGerakan[currentImageIndex] == "Waktu"){

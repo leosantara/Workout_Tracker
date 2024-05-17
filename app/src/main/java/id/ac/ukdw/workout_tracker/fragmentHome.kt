@@ -20,7 +20,13 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import id.ac.ukdw.workout_tracker.R
 import id.ac.ukdw.workout_tracker.databinding.FragmentHomeBinding
+import id.ac.ukdw.workout_tracker.util.RetrofitInstance
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.IOException
 
 class fragmentHome : Fragment() {
     private var _binding : FragmentHomeBinding? = null
@@ -74,29 +80,6 @@ class fragmentHome : Fragment() {
                                 binding.txtNamaPengguna.text = nama.toString()
                             }
                         }
-//                        if (databaseRef != null && userRef != null){
-//                            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-//                                override fun onDataChange(snapshot: DataSnapshot) {
-//                                    var namaa = snapshot.child("nama").getValue(String::class.java)
-//                                    if (namaa != null) {
-//                                        user = User(namaa)
-//                                        if (user.getNama() != null){
-//                                            binding.txtNamaPengguna.text = user.getNama()
-//
-//                                        }else {
-//                                            binding.txtNamaPengguna.text = "Nama Pengguna"
-//                                        }
-//                                    } else {
-//                                        binding.txtNamaPengguna.text = "Nama Pengguna"
-//                                    }
-//                                }
-//                                override fun onCancelled(error: DatabaseError) {
-//                                    // Handle onCancelled event
-//                                    Toast.makeText(requireContext(), "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
-//                        }
-
                     }
                 }
             }
@@ -107,6 +90,7 @@ class fragmentHome : Fragment() {
             binding.btnResepMakanan.setOnClickListener {
                 Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
                 Intent(requireContext(), MakananActivity::class.java).also {
+                    it.putExtra("fragmentType", "FragmentA")
                     startActivity(it)
                 }
             }
@@ -114,6 +98,14 @@ class fragmentHome : Fragment() {
             binding.btnABSWorkout.setOnClickListener {
                 Intent(getContext(), WorkoutActivity::class.java).also {
                     it.putExtra("fragmentType", "FragmentA")
+                    startActivity(it)
+                }
+            }
+
+            binding.btnTambahMakanan.setOnClickListener{
+                Toast.makeText(requireContext(), "Resep", Toast.LENGTH_SHORT).show()
+                Intent(requireContext(), MakananActivity::class.java).also {
+                    it.putExtra("fragmentType", "FragmentB")
                     startActivity(it)
                 }
             }
@@ -131,12 +123,28 @@ class fragmentHome : Fragment() {
                 }
             }
         }
-
+        getCurrentWeather()
         return binding.root
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getCurrentWeather() {
+        GlobalScope.launch(Dispatchers.IO){
+            val response = try{
+                RetrofitInstance.api.getCurrentWeather("-7.795580", "110.369492", "36d38ea2926714eeda638f01b699af0e")
+            }catch (e: IOException){
+                return@launch
+            }
+            if (response.isSuccessful && response.body()!= null){
+                withContext(Dispatchers.Main){
+                    binding.txtCuaca.text = "Cuaca : ${response.body()!!.weather.get(0).description}"
+                }
+            }
+        }
     }
 
 }

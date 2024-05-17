@@ -40,7 +40,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="25dp"
+                        android:id="@+id/txtCuaca"
+                        android:text="Cuaca" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:text="FarmaGym" />
 
                     <TextView
@@ -187,19 +195,19 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/btnMakananSehat"
+                        android:id="@+id/btnTambahMakanan"
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginLeft="5dp"
-                        android:contentDescription="Makanan Sehat"
+                        android:contentDescription="Tambah Makanan"
                         android:scaleType="centerInside"
-                        android:src="@drawable/img_makanan_sehat" />
+                        android:src="@drawable/img_tambah_makan" />
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Makanan Sehat"
+                        android:text="Tambah Resep"
                         android:textAlignment="center" />
                 </LinearLayout>
 

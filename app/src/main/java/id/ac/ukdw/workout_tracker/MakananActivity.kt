@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import id.ac.ukdw.workout_tracker.R
@@ -61,11 +62,28 @@ class MakananActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val fragmentResepMakanan = fragmentResepMakanan()
-        val fragmentManager : FragmentManager = supportFragmentManager
+        val fragmentType = intent.getStringExtra("fragmentType")
+        when (fragmentType) {
+            "FragmentA" -> {
+                val fragmentResepMakanan = fragmentResepMakanan()
+                supportFragmentManager.findFragmentById(R.id.makanan_activity)
+                    ?.let { removeFragment(it) }
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.makanan_activity, fragmentResepMakanan)
+                    .commit()
+            }
+            "FragmentB" -> {
+                val fragmentTambahMakanan = fragmentTambahMakanan()
+                supportFragmentManager.findFragmentById(R.id.makanan_activity)
+                    ?.let { removeFragment(it) }
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.makanan_activity, fragmentTambahMakanan)
+                    .commit()
+            }
+        }
+    }
 
-        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.makanan_activity, fragmentResepMakanan).commit()
+    private fun removeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().remove(fragment).commit()
     }
 }
