@@ -1,5 +1,6 @@
 package id.ac.ukdw.workout_tracker
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -244,10 +247,19 @@ class fragmentStartWorkout : Fragment() {
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
                         if (workouto == "abs"){
                             addNotification("ABS", dateToMilliseconds(tanggal,dateFormat))
+                            NotificationHelper(requireActivity(), "FarmaGym").notifyUser("ABS", dateToMilliseconds(tanggal,dateFormat))
+                            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
                         }else if (workouto == "arm"){
                             addNotification("ARM", dateToMilliseconds(tanggal,dateFormat))
+                            NotificationHelper(requireActivity(), "FarmaGym").notifyUser("ARM", dateToMilliseconds(tanggal,dateFormat))
+                            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
                         }else if (workouto == "chest"){
                             addNotification("Chest", dateToMilliseconds(tanggal,dateFormat))
+                            NotificationHelper(requireActivity(), "FarmaGym").notifyUser("Chest", dateToMilliseconds(tanggal,dateFormat))
+                            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
                         }
 
                         var userRef = databaseRef.child(currentUserUid)
@@ -273,8 +285,9 @@ class fragmentStartWorkout : Fragment() {
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
-
                             }
+
+
                         }
                     }
                 }
@@ -365,4 +378,6 @@ class fragmentStartWorkout : Fragment() {
         val mDate = dateFormat.parse(date)
         return mDate.time
     }
+
+
 }
