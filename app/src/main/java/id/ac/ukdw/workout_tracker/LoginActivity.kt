@@ -1,6 +1,7 @@
 package id.ac.ukdw.workout_tracker
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.auth.FirebaseAuth
 import id.ac.ukdw.workout_tracker.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding;
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,18 @@ class LoginActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java).also {
+                it.putExtra("fragmentType", "FragmentHome")
+                it.putExtra("selectedItemId", R.id.btnHome)
+            }
+            startActivity(intent)
+            finish()
+        }
 
         val fragmentLogin = fragment_login()
         val fragmentManager : FragmentManager = supportFragmentManager

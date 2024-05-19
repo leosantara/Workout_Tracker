@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import id.ac.ukdw.workout_tracker.databinding.FragmentLoginBinding
 
 
-class fragment_login : Fragment() {
+class   fragment_login : Fragment() {
 
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
