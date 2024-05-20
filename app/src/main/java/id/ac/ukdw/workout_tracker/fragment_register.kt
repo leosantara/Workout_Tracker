@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import id.ac.ukdw.workout_tracker.databinding.FragmentRegisterBinding
 
 
@@ -18,6 +20,7 @@ class fragment_register : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth : FirebaseAuth
+    private lateinit var databaseRef: DatabaseReference
 
         override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +30,7 @@ class fragment_register : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
             auth = FirebaseAuth.getInstance()
+            databaseRef = FirebaseDatabase.getInstance().reference.child("users")
             binding.btnDaftar.setOnClickListener{
                 val email = binding.txtRegisEmail.text.toString()
                 val pass = binding.txtRegisPass.text.toString()
@@ -65,31 +69,50 @@ class fragment_register : Fragment() {
                 RegisterFirebase(email, pass)
 
             }
-
-
-
-
-
         return binding.root
-
-
     }
 
     private fun RegisterFirebase(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()){
-                if(it.isSuccessful){
-                    Toast.makeText(requireContext(), "Register Berhasil", Toast.LENGTH_SHORT).show()
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.activity_login, fragment_login()).commit()
+//                if(it.isSuccessful){
+//                    Toast.makeText(requireContext(), "Register Berhasil", Toast.LENGTH_SHORT).show()
+//                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.activity_login, fragment_login()).commit()
+//
+//                }
+                if (it.isSuccessful) {
+                    val user = auth.currentUser
+                    val uid = user?.uid
 
+                    if (uid != null) {
+                        val userName = email.substringBefore("@")
+                        val userData = mapOf(
+                            "abs" to "0",
+                            "arm" to "0",
+                            "chest" to "0",
+                            "email" to email,
+                            "nama" to userName,
+                            "notifikasi" to emptyList<List<Any>>()
+                        )
+
+                        databaseRef.child(uid).setValue(userData)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    Toast.makeText(requireContext(), "Register Berhasil", Toast.LENGTH_SHORT).show()
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.activity_login, fragment_login())
+                                        .commit()
+                                } else {
+                                    Toast.makeText(requireContext(), "Gagal menyimpan data", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Register Gagal", Toast.LENGTH_SHORT).show()
                 }
-
             }
 
     }
 
-
-
-
-
 }
+
