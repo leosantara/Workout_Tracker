@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -19,19 +20,26 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding;
     lateinit var auth: FirebaseAuth
 
+    private val TAG = "LoginActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate")
         binding = ActivityLoginBinding.inflate(layoutInflater);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Log.d(TAG, "Checking notification permission")
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED -> {
+                    Log.d(TAG, "Notification permission granted")
                     // Izin sudah diberikan
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+                    Log.d(TAG, "Showing rationale for notification permission")
                     // Tampilkan dialog yang menjelaskan mengapa aplikasi memerlukan izin ini
                 }
                 else -> {
                     // Minta izin secara langsung
+                    Log.d(TAG, "Requesting notification permission")
                     requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
             }
