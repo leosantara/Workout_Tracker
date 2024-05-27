@@ -66,7 +66,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgFotoUser"
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/app_siluet_makanan"
                     app:civ_border_color="@color/black"
                     android:layout_gravity="center"
@@ -74,7 +74,7 @@
                     app:civ_border_width="1dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -87,6 +87,7 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
                         android:backgroundTint="#294199"
+                        android:textSize="15sp"
                         android:text="Kamera" />
 
                     <Button
@@ -96,6 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:backgroundTint="#294199"
+                        android:textSize="15sp"
                         android:text="Galeri" />
                 </LinearLayout>
 
@@ -112,7 +114,7 @@
                     android:paddingLeft="0dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
-                    android:textSize="15sp">
+                    android:textSize="20dp">
 
                 </EditText>
 

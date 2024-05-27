@@ -86,7 +86,7 @@
             android:layout_marginTop="30dp"
             android:textSize="20dp"
             android:layout_marginLeft="17dp"
-            android:text="Body Sample" />
+            android:text="contoh bentuk badan" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -258,7 +258,7 @@
                         android:id="@+id/textView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ABS Workout"
+                        android:text="Latihan Perut"
                         android:textAlignment="center" />
 
                 </LinearLayout>
@@ -281,7 +281,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ARM Workout"
+                        android:text="Latihan lengan"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -304,7 +304,7 @@
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Chest Workout"
+                        android:text="Latihan Dada"
                         android:textAlignment="center" />
                 </LinearLayout>
 

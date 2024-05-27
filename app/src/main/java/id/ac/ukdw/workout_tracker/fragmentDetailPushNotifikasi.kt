@@ -37,7 +37,9 @@ class fragmentDetailPushNotifikasi : Fragment() {
             binding.imageView3.setImageResource(R.drawable.img_arm_workout)
         }
 
+        // Menetapkan OnClickListener untuk tombol btnBack
         binding.btnBack.setOnClickListener{
+            // Membuat Intent baru untuk berpindah ke MainActivity
             Intent(getContext(), MainActivity::class.java).also {
                 it.putExtra("fragmentType", "FragmentPesan")
                 it.putExtra("selectedItemId", R.id.btnPesan)

@@ -63,7 +63,7 @@
         </EditText>
 
         <Button
-            android:layout_width="151dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
@@ -85,7 +85,8 @@
             android:backgroundTint="#00294199"
             app:defaultNavHost = "true"
             app:navGraph = "@navigation/nav_graph"
-            android:text="Pengguna baru? Daftar disini"
+            android:textSize="17sp"
+            android:text="Belum punya akun? Daftar disini"
             android:textColor="@color/black" />
     </LinearLayout>
 

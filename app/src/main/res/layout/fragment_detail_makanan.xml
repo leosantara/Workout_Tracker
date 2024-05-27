@@ -61,21 +61,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
-            android:paddingRight="34dp"
-
-            android:layout_marginStart="42dp"
-            android:text=" -   2 Mangga, potong dadu \n
--   2 Semangka, potong dadu \n
--   1 Pisang, potong melintang \n
--   1 Kiwi, kupas dan potong dadu \n
--   1 Cangkir anggur merah atau hijau, potong menjadi dua \n
--   1 Sendok makan madu \n
--   1 Sendok makan air perasan jeruk nipis atau lemon \n
--   Secubit garam (opsional) \n
--   Secubit bubuk kayu manis (opsional) \n
--   Daun mint segar untuk hiasan (opsional)"
+            android:paddingRight="45dp"
+            android:layout_marginStart="35dp"
+            android:text=" -  2 Mangga, potong dadu \n
+-  2 Semangka, potong dadu \n
+-  1 Pisang, potong melintang \n
+-  1 Kiwi, kupas dan potong dadu \n
+-  1 Cangkir anggur merah atau hijau, potong menjadi dua \n
+-  1 Sendok makan madu \n
+-  1Sendok makan air perasan jeruk nipis atau lemon \n
+-  Garam (opsional) \n
+-  Bubuk kayu manis (opsional) \n
+-  Daun mint segar untuk hiasan (opsional)"
             android:textSize="14dp"
+            android:justificationMode="inter_word"
             tools:ignore="TextSizeCheck" />
 
         <TextView
@@ -91,10 +90,14 @@
             android:id="@+id/txtCara"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:paddingRight="5dp"
-            android:text="1.  Campur semua buah dalam mangkuk besar. \n2.  Di mangkuk kecil, campur madu dan air perasan \n      jeruk nipis atau lemon. Jika diinginkan tambahkan \n      garam untuk memebrikan sentuhan kontrast atau \n      bubuk kayu manis untuk aroma tambahan. \n3.  Tuangkan ccampuran madu dan air perasan jeruk \n      nipis atau lemon ke dalam buah lalu aduk perlahan \n      hingga merata. \n4.  Hiasi dengan mint segar jika diinginkan"
+            android:layout_marginStart="54dp"
+            android:paddingRight="25dp"
+            android:text="1. Campur semua buah dalam mangkuk besar.
+            \n2. Di mangkuk kecil, campur madu dan air perasan jeruk nipis atau lemon. Jika diinginkan tambahkan garam untuk memebrikan sentuhan kontrast atau bubuk kayu manis untuk aroma tambahan.
+            \n3. Tuangkan ccampuran madu dan air perasan jeruk nipis atau lemon ke dalam buah lalu aduk perlahan hingga merata.
+            \n4. Hiasi dengan mint segar jika diinginkan"
             android:textSize="14dp"
+            android:justificationMode="inter_word"
             tools:ignore="TextSizeCheck" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,7 @@ class   fragment_login : Fragment() {
 
             //Validasi email
             if (email.isEmpty()){
-                binding.txtLoginEmail.error = "Email Harus Diisi"
+                binding.txtLoginEmail.error = "Email Wajib Diisi"
                 binding.txtLoginEmail.requestFocus()
                 return@setOnClickListener
             }
@@ -56,7 +56,7 @@ class   fragment_login : Fragment() {
 
             //Validasi password
             if (password.isEmpty()){
-                binding.txtLoginPass.error = "Password Harus Diisi"
+                binding.txtLoginPass.error = "Password Wajib Diisi"
                 binding.txtLoginPass.requestFocus()
                 return@setOnClickListener
             }

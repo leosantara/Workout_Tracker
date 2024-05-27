@@ -40,16 +40,16 @@ class fragmentListPesanNotif : Fragment() {
         notifAdapter = NotifAdapter(notifList)
         binding.recyclerView.adapter = notifAdapter
 
+        // Menetapkan tindakan yang akan dilakukan ketika item di notifAdapter diklik
         notifAdapter.onItemClick = {
             val fragment = fragmentDetailNotif()
             val args = Bundle().apply {
                 putParcelable("notif", it)
             }
+            // Menetapkan argumen ke fragment
             fragment.arguments = args
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_activity, fragment).commit()
         }
-
-
         return binding.root
     }
 
@@ -57,29 +57,6 @@ class fragmentListPesanNotif : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    // Malah semua akun jadi satu notifikasi kocak
-//    private fun fetchNotifications() {
-//        databaseRef.get().addOnSuccessListener { snapshot ->
-//            for (userSnapshot in snapshot.children) {
-//                val notifSnapshot = userSnapshot.child("notifikasi")
-//                if (notifSnapshot.exists()) {
-//                    val t = object : GenericTypeIndicator<List<List<Any>>>() {}
-//                    val notifications = notifSnapshot.getValue(t)
-//                    if (notifications != null) {
-//                        for (notification in notifications) {
-//                            val workoutType = notification[0] as? String ?: continue
-//                            val time = notification[1] as? Long ?: continue
-//                            notifList.add(NotifClass(workoutType, time))
-//                        }
-//                    }
-//                }
-//            }
-//            // Handle notifList (e.g., update UI)
-//            notifAdapter.notifyDataSetChanged()
-//        }.addOnFailureListener {
-//
-//        }
-//    }
 
     private fun fetchNotifications() {
         databaseRef.child(currentUserUid).child("notifikasi").get().addOnSuccessListener { snapshot ->

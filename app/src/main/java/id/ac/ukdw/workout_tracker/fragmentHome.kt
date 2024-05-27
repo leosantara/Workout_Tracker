@@ -52,8 +52,10 @@ class fragmentHome : Fragment() {
                             binding.imgProfil.setImageResource(R.drawable.app_profil)
                         }
 
+                        // Untuk mendapatkan referensi ke node "users" di Firebase Realtime Database
                         databaseRef = FirebaseDatabase.getInstance().getReference("users")
                         databaseRef.child(currentUserUid).get().addOnSuccessListener {
+                            // Untuk memeriksa apakah data pengguna dengan UID tersebut ada
                             if (it.exists()){
                                 var nama = it.child("nama").value
                                 binding.txtNamaPengguna.text = nama.toString()

@@ -62,8 +62,9 @@ class fragmentLainnya : Fragment() {
                                 val armValue = (arm?.toString()?.toIntOrNull() ?: 0)
                                 val chestValue = (chest?.toString()?.toIntOrNull() ?: 0)
 
+                                // Menghitung total kalori yang terbakar berdasarkan nilai absValue, armValue, dan chestValue
                                 val total = absValue*80 + armValue*80 + chestValue*100
-                                binding.txtKalori.text = "Total memakar hinggal $total Kalori!!!"
+                                binding.txtKalori.text = "Total membakar hinggal $total Kalori!!!"
 
                             }
                         }

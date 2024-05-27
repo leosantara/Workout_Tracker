@@ -36,20 +36,34 @@ class fragment_register : Fragment() {
                 val pass = binding.txtRegisPass.text.toString()
                 val passConfirm = binding.txtRegisPassConfirm.text.toString()
 
-                if (email.isEmpty()){
-                    binding.txtRegisEmail.error = "Email Harus Diisi"
+                // Memeriksa apakah variabel email kosong
+                if (email.isEmpty()) {
+                    // Menampilkan pesan error pada txtRegisEmail dengan pesan "Email Wajib Diisi"
+                    binding.txtRegisEmail.error = "Email Wajib Diisi"
+                    // Memfokuskan kembali ke txtRegisEmail agar pengguna langsung diarahkan untuk mengisi email
                     binding.txtRegisEmail.requestFocus()
+                    // Menghentikan eksekusi lebih lanjut dalam blok setOnClickListener
                     return@setOnClickListener
                 }
 
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+
+                // Memeriksa apakah format email yang dimasukkan valid
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    // Jika email tidak sesuai dengan pola yang valid, tampilkan pesan error pada komponen txtRegisEmail
+                    // 'txtRegisEmail' adalah referensi ke komponen input email dalam tampilan
                     binding.txtRegisEmail.error = "Email Tidak Valid"
+
+                    // Mengarahkan fokus ke komponen input email (txtRegisEmail)
+                    // agar pengguna segera memperbaiki input email yang salah
                     binding.txtRegisEmail.requestFocus()
+
+                    // Menghentikan eksekusi dari event setOnClickListener
+                    // agar kode selanjutnya tidak dijalankan sampai email valid dimasukkan
                     return@setOnClickListener
                 }
 
                 if (pass.isEmpty()){
-                    binding.txtRegisPass.error = "Password Harus Diisi"
+                    binding.txtRegisPass.error = "Password Wajib Diisi"
                     binding.txtRegisPass.requestFocus()
                     return@setOnClickListener
                 }

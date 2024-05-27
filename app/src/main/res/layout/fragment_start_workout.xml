@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_gravity="center"
-                android:text="60 reps of Jumping Jacks"
+                android:text="60x repetisi Jumping Jacks"
                 android:textSize="18dp" />
 
             <TextView
