@@ -17,7 +17,7 @@ import id.ac.ukdw.workout_tracker.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding;
+    private lateinit var binding: ActivityLoginBinding
     lateinit var auth: FirebaseAuth
 
     private val TAG = "LoginActivity"
@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
-        binding = ActivityLoginBinding.inflate(layoutInflater);
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Log.d(TAG, "Checking notification permission")
             when {
